@@ -4,18 +4,15 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.*;
 
+import cnge.core.CNGE;
 import cnge.graphics.texture.Texture;
 
-public class FBO {
-    
-	private static Window window;
+public class FBO extends CNGE {
 	
     private int id;
     private int depthRenderBufferID;
     private Texture texture;
-    
-    private static Camera camera;
-    
+
     /**
      * creates a new fbo that is linked to the given texture
      * 
@@ -37,7 +34,7 @@ public class FBO {
         //unbind
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
-    
+
     /**
      * makes a dummy fbo with not yet a real texture
      */
@@ -59,12 +56,7 @@ public class FBO {
         //unbind
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
-    
-    public static void giveStuff(Window w, Camera c) {
-    	window = w;
-    	camera = c;
-    }
-    
+
     /**
      * binds a new replacement texture to the fbo
      * 

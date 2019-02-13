@@ -1,7 +1,7 @@
 package cnge.core.animation;
 
 /**
- * an animation that returns a frame in a 2d tile sheet
+ * an animation that returns a call in a 2d tile sheet
  * 
  * @author Emmet
  *

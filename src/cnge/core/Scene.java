@@ -6,8 +6,6 @@ import cnge.graphics.Window;
 
 public abstract class Scene<S extends Scene<S>> {
 
-	protected static Base base;
-	
 	protected static Window window;
 	
 	protected static Camera camera;
@@ -32,10 +30,10 @@ public abstract class Scene<S extends Scene<S>> {
 		return camera;
 	}
 	
-	public static void giveStuff(Camera c, Base b, Window w) {
+	public static void giveStuff(Camera c, Window w) {
 		camera = c;
 		cameraTransform = c.getTransform();
-		base = b;
+		//base = b;
 		window = w;
 	}
 	
@@ -45,7 +43,7 @@ public abstract class Scene<S extends Scene<S>> {
 	}
 	
 	public static void changeScene(Scene s) {
-		base.setScene(s);
+	//	base.setScene(s);
 	}
 	
 	public void setCameraCenter(float x, float y) {

@@ -73,11 +73,10 @@ abstract public class Shader {
 	/**
 	 * starts the shader.
 	 * call this before rending to use the shader
-	 * 
-	 * @param params - the parameters to gice to the shader through uniforms
 	 */
-	public void enable() {
+	public Shader enable() {
 		glUseProgram(program);
+		return this;
 	}
 
 	/**

@@ -18,7 +18,7 @@ public class ClipShader extends Shader {
 	public ClipShader() {
 		super("res/shaders/clip/cli2d.vs", "res/shaders/clip/cli2d.fs");
 		
-		texLoc = glGetUniformLocation(program, "frame");
+		texLoc = glGetUniformLocation(program, "call");
 		colorLoc = glGetUniformLocation(program, "inColor");
 		modelLoc = glGetUniformLocation(program, "model");
 		planeLoc = glGetUniformLocation(program, "plane");

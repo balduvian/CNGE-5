@@ -11,7 +11,7 @@ import static org.lwjgl.opengl.GL11.glBlendFunc;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glViewport;
-import static org.lwjgl.opengl.GL11.glColorMask;
+import static org.lwjgl.opengl.GL11C.glClearColor;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -19,9 +19,11 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import javax.imageio.ImageIO;
 
+import cnge.core.CNGE;
+import cnge.core.Screen;
 import org.joml.Vector2f;
-import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWImage;
@@ -29,116 +31,168 @@ import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
 
-import cnge.core.Resizer;
+public class Window extends CNGE {
 
-public class Window {
-
-	public static final int DEFAULT_MONITOR_REFRESH = -1;
-
-	private long cursorID;
-	private Resizer resizer;
+	public static final int DEFAULT_INIT = -1;
 
 	/*
 	 * inits
 	 */
 	private boolean resizable = true;
 	private boolean full = false;
-	private int width = 640;
-	private int height = 480;
+	private boolean decorated = true;
+
+	private int initX = DEFAULT_INIT;
+	private int initY = DEFAULT_INIT;
+	private int initWidth = DEFAULT_INIT;
+	private int initHeight = DEFAULT_INIT;
+
+	private String iconPath = null;
 	private String name = "oCNGE 5";
-	private int monitorIndex = 0;
-	private int refreshRate = DEFAULT_MONITOR_REFRESH;
 	private boolean vSync = true;
 
-	private PointerBuffer monitors;
-	private int numMonitors;
+    private long cursorID;
+
+	private int x;
+	private int y;
+	private int width;
+	private int height;
+
 	private long window;
 	private GLFWVidMode vidMode;
 	private long monitor;
 
-	private interface Resizer() {
+	//region inits
 
+	public Window initResizable(boolean r) {
+		resizable = r;
+		return this;
 	}
 
-	public Window
-	public Window() {
+	public Window initFull(boolean f) {
+		full = f;
+		return this;
+	}
 
-		glfwInit();
-		
+	public Window initDecorated(boolean d) {
+		decorated = d;
+		return this;
+	}
+
+	public Window initDims(int w, int h) {
+		initWidth = w;
+		initHeight = h;
+		return this;
+	}
+
+	public Window initPosition(int x, int y) {
+		initX = x;
+		initY = y;
+		return this;
+	}
+
+	public Window initName(String n) {
+		name = n;
+		return this;
+	}
+
+	public Window initVsync(boolean v) {
+		vSync = v;
+		return this;
+	}
+
+	public Window initIcon(String path) {
+        iconPath = path;
+        return this;
+    }
+
+	//endregion
+
+	public Window init() {
 		glfwSetErrorCallback(GLFWErrorCallback.createPrint(System.err));
+
 		if(!glfwInit()) {
 			System.err.println("GLFW Failed to Initialize");
 			System.exit(-1);
 		}
-		
+
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		glfwWindowHint(GLFW_RESIZABLE, r ? GLFW_TRUE: GLFW_FALSE);
-		//glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
-		
-		vidMode = glfwGetVideoMode(glfwGetPrimaryMonitor());	
+		glfwWindowHint(GLFW_RESIZABLE, resizable ? GLFW_TRUE : GLFW_FALSE);
+		glfwWindowHint(GLFW_DECORATED, decorated ? GLFW_TRUE : GLFW_FALSE);
 
-		fixedFrameRate = vidMode.refreshRate();
-		
-		if(fu) {
-			width = vidMode.width();
-			height = vidMode.height();
-			window = glfwCreateWindow(width, height, t, glfwGetPrimaryMonitor(), 0);
-		}else {
-			width = vidMode.width()/2;
-			height = vidMode.height()/2;
-			window = glfwCreateWindow(width, height, t, 0, 0);
-		}
+		vidMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+
+		calculate();
+		calcFramerate();
+
+		window = glfwCreateWindow(1, 1, name, 0, 0);
+
+		reWindow();
+
 		glfwMakeContextCurrent(window);
 		createCapabilities();
-		
-		glfwSwapInterval(1);
-		
-		glfwSetWindowSizeCallback(window, 
+
+		glfwSwapInterval(vSync ? 1 : 0);
+
+		glfwSetWindowSizeCallback(window,
 			(long window, int ww, int hh) -> {
 				width = ww;
 				height = hh;
-				glViewport(0, 0, width, height);
-				resizer.resize(width, height);
-			} 	
+				screen.reFrame(width, height);
+			}
 		);
+
+		if(iconPath != null) {
+		    setIcon(iconPath);
+        }
 
 		glEnable(GL30.GL_CLIP_DISTANCE0);
 		glEnable(GL_TEXTURE_2D);
-		
+
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		return this;
 	}
-	
-	public void setResize(Resizer r) {
-		resizer = r;
+
+	public void calcFramerate() {
+		framerate = (framerate == -1) ? vidMode.refreshRate() + 10 : framerate;
 	}
-	
-	public void resetCursor() {
-		glfwSetCursorPos(window, vidMode.width(), vidMode.height());
+
+	public void calcMonitor() {
+		monitor = full ? glfwGetPrimaryMonitor() : 0;
 	}
-	
-	public void fullscreen(boolean full) {
-		if(full) {
-			if(fixedFrameRate == -1) {
-				glfwSetWindowMonitor(window, glfwGetPrimaryMonitor(), 0, 0, vidMode.width(), vidMode.height(), vidMode.refreshRate());
-			}else {
-				glfwSetWindowMonitor(window, glfwGetPrimaryMonitor(), 0, 0, vidMode.width(), vidMode.height(), fixedFrameRate);
-			}
-		}else {
-			if(fixedFrameRate == -1) {
-				glfwSetWindowMonitor(window, 0, vidMode.width()/4, vidMode.height()/4, vidMode.width()/2, vidMode.height()/2, vidMode.refreshRate());
-			}else {
-				glfwSetWindowMonitor(window, 0, vidMode.width()/4, vidMode.height()/4, vidMode.width()/2, vidMode.height()/2, fixedFrameRate);
-			}
-		}
+
+	public void calcDims() {
+		width = full ?  vidMode.width() :  vidMode.width() / 2;
+		height = full ? vidMode.height() : vidMode.height() / 2;
 	}
-	
-	public int getRefreshRate() {
-		return vidMode.refreshRate();
+
+	public void calcPosition() {
+		x = full ? 0 : vidMode.width() / 4;
+		y = full ? 0 : vidMode.height() / 4;
 	}
-	
+
+	public void calculate() {
+		calcMonitor();
+		calcDims();
+		calcPosition();
+	}
+
+	public void reWindow() {
+		glfwSetWindowMonitor(window, monitor, x, y, width, height, framerate);
+	}
+
+	public void setFull(boolean f) {
+		full = f;
+	}
+
+    public void resetCursor() {
+        glfwSetCursorPos(window, vidMode.width(), vidMode.height());
+    }
+
 	public void showCursor() {
 		glfwSetCursor(window, cursorID);
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
@@ -188,7 +242,7 @@ public class Window {
 		buffer.flip();
 			
 	    // create a GLFWImage
-	    GLFWImage img= GLFWImage.create();
+	    GLFWImage img = GLFWImage.create();
 	    img.width(bwi);     // setup the images' width
 	    img.height(bhi);   // setup the images' height
 	    img.pixels(buffer);   // pass image data
@@ -262,21 +316,25 @@ public class Window {
 		return glfwGetKey(window, keyCode) == GLFW_PRESS;
 	}
 	
-	public void update() {
+	public void pollEvents() {
 		glfwPollEvents();
 	}
 	
 	public static void clear() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
-	
+
+	public static void clear(float r, float g, float b, float a) {
+		glClearColor(r, g, b, a);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	}
+
 	public void swap() {
 		glfwSwapBuffers(window);
 	}
 	
 	public void close() {
 		glfwSetWindowShouldClose(window, true);
-		//glfwTerminate();
 	}
 	
 	public boolean shouldClose() {

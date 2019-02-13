@@ -17,7 +17,7 @@ public class TextShader extends Shader {
 	public TextShader() {
 		super("res/shaders/text/txt2d.vs", "res/shaders/text/txt2d.fs");
 		
-		texLoc = glGetUniformLocation(program, "frame");
+		texLoc = glGetUniformLocation(program, "call");
 		colorLoc = glGetUniformLocation(program, "inColor");
 		outlineLoc = glGetUniformLocation(program, "outline");
 		dimsLoc = glGetUniformLocation(program, "dims");

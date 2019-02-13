@@ -1,7 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0aa3887a-8bcf-4bcf-a842-cf8d6e9e0d70" name="Default Changelist" comment="" />
+    <list default="true" id="0aa3887a-8bcf-4bcf-a842-cf8d6e9e0d70" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/res/cnge/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/cnge/missing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/cnge/shaders/base/base.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/cnge/shaders/base/base.vs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/cnge/text.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/font/default.bmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/font/default.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/levels/level1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/levels/level2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/levels/level3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/levels/level4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/levels/level5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/levels/level6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/levels/level7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/border/bor2d.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/border/bor2d.vs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/clip/cli2d.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/clip/cli2d.vs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/color/col2d.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/color/col2d.vs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/hue/hue2d.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/hue/hue2d.vs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/movie/mov2d.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/movie/mov2d.vs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/noise/noi2d.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/noise/noi2d.vs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/sten/stn2d.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/sten/stn2d.vs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/text/txt2d.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/text/txt2d.vs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/texture/tex2d.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/texture/tex2d.vs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/tile/til2d.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/shaders/tile/til2d.vs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/sounds/carrot-gun.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/sounds/explosion.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/sounds/lemoon.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/sounds/song0.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/sounds/song1.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/sounds/song2.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/sounds/spark.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/sounds/squish.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/sounds/xp.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/carrot-cutout.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/carrot-projectile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/carrot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/explosion.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/gibs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/how-to-card.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/how-to/screen0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/how-to/screen1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/how-to/screen2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/how-to/screen3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/how-to/screen4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/melon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/menu-selector.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/selector.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/sky-bac.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/spark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/tileset.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/title.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/tnt-timer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cnge/core/CNGE.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cnge/core/Framer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cnge/core/GameLoop.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cnge/core/Screen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CNGE 5/CNGE/Base.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CNGE 5/CNGE/Window.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CNGE 5/Game/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CNGE 5/Game/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cnge/core/AssetBundle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cnge/core/AssetBundle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cnge/core/Base.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cnge/core/BasePreset.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cnge/core/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cnge/core/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cnge/core/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cnge/core/Timer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cnge/core/animation/Anim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cnge/core/animation/Anim.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cnge/core/animation/Anim1D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cnge/core/animation/Anim1D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cnge/core/animation/Anim2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cnge/core/animation/Anim2D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cnge/core/level/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cnge/core/level/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cnge/core/morph/CustomMorph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cnge/core/morph/CustomMorph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cnge/core/morph/Morph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cnge/core/morph/Morph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cnge/graphics/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cnge/graphics/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cnge/graphics/FBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cnge/graphics/FBO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cnge/graphics/Shader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cnge/graphics/Shader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cnge/graphics/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cnge/graphics/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cnge/graphics/shapes/RectShape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cnge/graphics/shapes/RectShape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/MelonBase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/MelonBlock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/MelonLoadScreen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/WinLoadScreen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/GameAssets.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/GameScene.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/MelonFont.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/MelonLevel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/MelonMap.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/entities/Carrot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/entities/CarrotBullet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/entities/CarrotTransition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/entities/Explosion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/entities/Gib.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/entities/Melon.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/entities/Selector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/entities/SkyBackground.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/entities/TntTimer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/levels/Level1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/levels/Level2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/levels/Level3.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/levels/Level4.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/levels/Level5.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/levels/Level6.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/game/levels/Level7.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/menu/MenuAssets.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/menu/MenuFont.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/menu/MenuScene.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/menu/entities/HowToCard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/menu/entities/MenuBackground.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/menu/entities/MenuSelector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/menu/entities/Title.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/win/WinAssets.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/win/WinScene.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/shaders/ClipShader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/shaders/ClipShader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/shaders/HueShader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/shaders/HueShader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/shaders/TextShader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/shaders/TextShader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/shaders/TileShader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/shaders/TileShader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/oCNGE/Base.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/oCNGE/Camera3D.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/oCNGE/Transform3D.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/oCNGE/VBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/oCNGE/Window.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/oGame/Main.java" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -11,11 +144,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/cnge/core/Base.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/game/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="82" column="25" lean-forward="true" selection-start-line="82" selection-start-column="25" selection-end-line="82" selection-end-column="25" />
+            <state relative-caret-position="1061">
+              <caret line="105" column="25" lean-forward="true" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cnge/graphics/Camera.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="134">
+              <caret line="29" column="23" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="23" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#407#408#0" expanded="true" />
+                <element signature="e#444#445#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cnge/graphics/FBO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1662">
+              <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -23,58 +179,83 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cnge/graphics/Window.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="896">
-              <caret line="62" column="17" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="17" />
+            <state relative-caret-position="165">
+              <caret line="159" column="29" selection-start-line="159" selection-start-column="29" selection-end-line="159" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2987#2988#0" expanded="true" />
-                <element signature="e#3005#3006#0" expanded="true" />
-                <element signature="e#3036#3037#0" expanded="true" />
-                <element signature="e#3102#3103#0" expanded="true" />
-                <element signature="e#3807#3808#0" expanded="true" />
-                <element signature="e#3842#3843#0" expanded="true" />
-                <element signature="e#4001#4002#0" expanded="true" />
-                <element signature="e#4065#4066#0" expanded="true" />
-                <element signature="e#6737#6738#0" expanded="true" />
-                <element signature="e#6799#6800#0" expanded="true" />
-                <element signature="e#6843#6844#0" expanded="true" />
-                <element signature="e#6898#6899#0" expanded="true" />
-                <element signature="e#6924#6925#0" expanded="true" />
-                <element signature="e#6947#6948#0" expanded="true" />
-                <element signature="e#6979#6980#0" expanded="true" />
-                <element signature="e#7036#7037#0" expanded="true" />
-                <element signature="e#7060#7061#0" expanded="true" />
-                <element signature="e#7090#7091#0" expanded="true" />
-                <element signature="e#7215#7216#0" expanded="true" />
-                <element signature="e#7258#7259#0" expanded="true" />
-                <element signature="e#7285#7286#0" expanded="true" />
-                <element signature="e#7304#7305#0" expanded="true" />
-                <element signature="e#7332#7333#0" expanded="true" />
-                <element signature="e#7352#7353#0" expanded="true" />
-                <element signature="e#7502#7503#0" expanded="true" />
-                <element signature="e#7522#7523#0" expanded="true" />
+                <element signature="e#3746#3747#0" expanded="true" />
+                <element signature="e#3797#3798#0" expanded="true" />
+                <element signature="e#4162#4163#0" expanded="true" />
+                <element signature="e#4238#4239#0" expanded="true" />
+                <element signature="e#4273#4274#0" expanded="true" />
+                <element signature="e#4288#4289#0" expanded="true" />
+                <element signature="e#4321#4322#0" expanded="true" />
+                <element signature="e#4396#4397#0" expanded="true" />
+                <element signature="e#4554#4555#0" expanded="true" />
+                <element signature="e#4618#4619#0" expanded="true" />
+                <element signature="e#7594#7595#0" expanded="true" />
+                <element signature="e#7656#7657#0" expanded="true" />
+                <element signature="e#7700#7701#0" expanded="true" />
+                <element signature="e#7755#7756#0" expanded="true" />
+                <element signature="e#7785#7786#0" expanded="true" />
+                <element signature="e#7808#7809#0" expanded="true" />
+                <element signature="e#7840#7841#0" expanded="true" />
+                <element signature="e#7897#7898#0" expanded="true" />
+                <element signature="e#8070#8071#0" expanded="true" />
+                <element signature="e#8100#8101#0" expanded="true" />
+                <element signature="e#8125#8126#0" expanded="true" />
+                <element signature="e#8170#8171#0" expanded="true" />
+                <element signature="e#8204#8205#0" expanded="true" />
+                <element signature="e#8247#8248#0" expanded="true" />
+                <element signature="e#8274#8275#0" expanded="true" />
+                <element signature="e#8293#8294#0" expanded="true" />
+                <element signature="e#8321#8322#0" expanded="true" />
+                <element signature="e#8341#8342#0" expanded="true" />
+                <element signature="e#8491#8492#0" expanded="true" />
+                <element signature="e#8511#8512#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cnge/core/morph/Morph.java">
+        <entry file="file://$PROJECT_DIR$/src/cnge/core/CNGE.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
-              <caret line="114" column="40" selection-start-line="114" selection-start-column="40" selection-end-line="114" selection-end-column="40" />
+            <state relative-caret-position="257">
+              <caret line="81" column="26" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/oCNGE/Window.java">
+        <entry file="file://$PROJECT_DIR$/src/cnge/core/Screen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="57" />
+            <state relative-caret-position="889">
+              <caret line="56" selection-start-line="56" selection-end-line="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cnge/core/Timer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="20">
+              <caret line="28" column="28" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/cnge/core/GameLoop.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -85,8 +266,24 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>CNGE</find>
+      <find>resi</find>
+      <find>repl</find>
+      <find>frame</find>
+      <find>window</find>
+      <find>setDims</find>
+      <find>camera</find>
+      <find>FRAMERATE</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -100,93 +297,99 @@
         <option value="$PROJECT_DIR$/src/CNGE/Camera3D.java" />
         <option value="$PROJECT_DIR$/src/CNGE/VBO.java" />
         <option value="$PROJECT_DIR$/src/oCNGE/VBO.java" />
+        <option value="$PROJECT_DIR$/src/cnge/core/morph/Framer.java" />
         <option value="$PROJECT_DIR$/src/cnge/core/Base.java" />
+        <option value="$PROJECT_DIR$/src/cnge/core/Framer.java" />
+        <option value="$PROJECT_DIR$/src/oCNGE/Window.java" />
+        <option value="$PROJECT_DIR$/src/cnge/graphics/shapes/RectShape.java" />
+        <option value="$PROJECT_DIR$/src/cnge/graphics/Shader.java" />
+        <option value="$PROJECT_DIR$/src/cnge/core/morph/Morph.java" />
+        <option value="$PROJECT_DIR$/src/cnge/graphics/Camera.java" />
+        <option value="$PROJECT_DIR$/src/game/scenes/game/MelonFont.java" />
+        <option value="$PROJECT_DIR$/src/cnge/core/AssetBundle.java" />
+        <option value="$PROJECT_DIR$/src/cnge/core/Scene.java" />
+        <option value="$PROJECT_DIR$/src/cnge/core/level/Map.java" />
+        <option value="$PROJECT_DIR$/src/cnge/core/morph/CustomMorph.java" />
+        <option value="$PROJECT_DIR$/src/cnge/core/animation/Anim.java" />
+        <option value="$PROJECT_DIR$/src/cnge/core/Timer.java" />
+        <option value="$PROJECT_DIR$/src/cnge/graphics/FBO.java" />
+        <option value="$PROJECT_DIR$/src/cnge/core/CNGE.java" />
         <option value="$PROJECT_DIR$/src/cnge/graphics/Window.java" />
+        <option value="$PROJECT_DIR$/src/game/Main.java" />
+        <option value="$PROJECT_DIR$/src/cnge/core/Screen.java" />
+        <option value="$PROJECT_DIR$/src/cnge/core/GameLoop.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-11" />
-    <option name="width" value="2255" />
-    <option name="height" value="2111" />
+    <option name="x" value="-110" />
+    <option name="y" value="-20" />
+    <option name="width" value="1940" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="CNGE 5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CNGE 5" type="462c0819:PsiDirectoryNode" />
+              <item name="CNGE-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNGE-5" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="CNGE 5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CNGE 5" type="462c0819:PsiDirectoryNode" />
+              <item name="CNGE-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNGE-5" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="CNGE 5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CNGE 5" type="462c0819:PsiDirectoryNode" />
+              <item name="CNGE-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNGE-5" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="cnge" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="CNGE 5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CNGE 5" type="462c0819:PsiDirectoryNode" />
+              <item name="CNGE-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNGE-5" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="cnge" type="462c0819:PsiDirectoryNode" />
               <item name="core" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="CNGE 5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CNGE 5" type="462c0819:PsiDirectoryNode" />
+              <item name="CNGE-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNGE-5" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="cnge" type="462c0819:PsiDirectoryNode" />
               <item name="core" type="462c0819:PsiDirectoryNode" />
               <item name="animation" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="CNGE 5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CNGE 5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="cnge" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="level" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CNGE 5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CNGE 5" type="462c0819:PsiDirectoryNode" />
+              <item name="CNGE-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNGE-5" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="cnge" type="462c0819:PsiDirectoryNode" />
               <item name="core" type="462c0819:PsiDirectoryNode" />
               <item name="morph" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="CNGE 5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CNGE 5" type="462c0819:PsiDirectoryNode" />
+              <item name="CNGE-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNGE-5" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="cnge" type="462c0819:PsiDirectoryNode" />
               <item name="graphics" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="CNGE 5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CNGE 5" type="462c0819:PsiDirectoryNode" />
+              <item name="CNGE-5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNGE-5" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="game" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="CNGE 5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CNGE 5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="oCNGE" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CNGE 5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNGE-5" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
@@ -196,18 +399,20 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/ref/javadoc/lwjgl-opengl-javadoc.jar!/" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550037818314" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Programming\java\CNGE-5" />
+      <recent name="C:\Users\Emmet\IdeaProjects\CNGE 5\ref" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Emmet\IdeaProjects\CNGE 5\src" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Emmet\IdeaProjects\CNGE 5\ref" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -225,7 +430,7 @@
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="INCLUDE_PROVIDED_SCOPE" value="true" />
-      <option name="MAIN_CLASS_NAME" value="oGame.Main" />
+      <option name="MAIN_CLASS_NAME" value="game.Main" />
       <module name="CNGE 5" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -255,87 +460,70 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="2575" height="1415" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.107959025" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15503356" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info id="Image Layers" order="5" />
+      <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32941177" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.85365856" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.1764706" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.17705382" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.18413597" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3286119" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="10" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.15580736" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24966443" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="right" id="Maven" order="7" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15570469" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="UI Designer" order="3" />
+      <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info id="Image Layers" order="5" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.17705382" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.31728044" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3286119" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.15580736" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24966443" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="right" id="Maven" order="7" />
+    </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/oGame/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/oCNGE/Base.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/oCNGE/Transform3D.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-          <folding>
-            <element signature="e#196#197#0" expanded="true" />
-            <element signature="e#217#218#0" expanded="true" />
-            <element signature="e#392#393#0" expanded="true" />
-            <element signature="e#439#440#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/oCNGE/Camera3D.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="27" column="26" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#369#370#0" expanded="true" />
-            <element signature="e#390#391#0" expanded="true" />
-            <element signature="e#1203#1204#0" expanded="true" />
-            <element signature="e#1239#1240#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/oCNGE/VBO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/oGame/Main.java" />
+    <entry file="file://$PROJECT_DIR$/src/oCNGE/Transform3D.java" />
+    <entry file="file://$PROJECT_DIR$/src/oCNGE/Camera3D.java" />
+    <entry file="file://$PROJECT_DIR$/src/oCNGE/VBO.java" />
     <entry file="file://$PROJECT_DIR$/src/cnge/core/Resizer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
@@ -364,63 +552,244 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/oCNGE/Window.java">
+    <entry file="file://$PROJECT_DIR$/src/cnge/graphics/texture/TileTexture.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="57" />
+        <state relative-caret-position="671">
+          <caret line="30" column="4" lean-forward="true" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cnge/core/morph/Framer.java" />
+    <entry file="file://$PROJECT_DIR$/src/cnge/core/BasePreset.java" />
+    <entry file="file://$PROJECT_DIR$/src/game/scenes/game/entities/CarrotBullet.java" />
+    <entry file="file://$PROJECT_DIR$/src/game/scenes/game/GameAssets.java" />
+    <entry file="file://$PROJECT_DIR$/src/cnge/core/Framer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cnge/graphics/texture/TexturePreset.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1161">
+          <caret line="43" column="36" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cnge/graphics/texture/Texture.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1431">
+          <caret line="65" column="16" selection-start-line="65" selection-start-column="16" selection-end-line="65" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cnge/graphics/ALManagement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-17">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cnge/core/BaseShader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cnge/graphics/shapes/RectShape.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="11" column="23" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cnge/graphics/Shape.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/icon.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/shaders/clip/cli2d.fs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/cnge/shaders/base/base.fs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cnge/core/Base.java" />
+    <entry file="file://$PROJECT_DIR$/src/cnge/core/animation/Anim1D.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/scenes/game/MelonFont.java" />
+    <entry file="file://$PROJECT_DIR$/src/game/WinLoadScreen.java" />
+    <entry file="file://$PROJECT_DIR$/src/game/MelonLoadScreen.java" />
+    <entry file="file://$PROJECT_DIR$/src/cnge/core/AssetBundle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/cnge/core/Scene.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/scenes/game/GameScene.java" />
     <entry file="file://$PROJECT_DIR$/src/cnge/core/morph/Morph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="114" column="40" selection-start-line="114" selection-start-column="40" selection-end-line="114" selection-end-column="40" />
+        <state relative-caret-position="-7">
+          <caret line="92" column="21" selection-start-line="92" selection-start-column="21" selection-end-line="92" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cnge/core/level/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="205" column="30" selection-start-line="205" selection-start-column="30" selection-end-line="205" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cnge/core/animation/Anim.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/oCNGE/Window.java" />
+    <entry file="file://$PROJECT_DIR$/src/oCNGE/Base.java" />
+    <entry file="file://$PROJECT_DIR$/src/cnge/graphics/Shader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-263">
+          <caret line="71" column="4" lean-forward="true" selection-start-line="71" selection-start-column="4" selection-end-line="71" selection-end-column="4" />
+          <folding>
+            <element signature="e#1810#1811#0" expanded="true" />
+            <element signature="e#1874#1875#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cnge/core/morph/CustomMorph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cnge/graphics/FBO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1662">
+          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cnge/graphics/Camera.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="29" column="23" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#407#408#0" expanded="true" />
+            <element signature="e#444#445#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1061">
+          <caret line="105" column="25" lean-forward="true" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cnge/graphics/Window.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="896">
-          <caret line="62" column="17" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="17" />
+        <state relative-caret-position="165">
+          <caret line="159" column="29" selection-start-line="159" selection-start-column="29" selection-end-line="159" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2987#2988#0" expanded="true" />
-            <element signature="e#3005#3006#0" expanded="true" />
-            <element signature="e#3036#3037#0" expanded="true" />
-            <element signature="e#3102#3103#0" expanded="true" />
-            <element signature="e#3807#3808#0" expanded="true" />
-            <element signature="e#3842#3843#0" expanded="true" />
-            <element signature="e#4001#4002#0" expanded="true" />
-            <element signature="e#4065#4066#0" expanded="true" />
-            <element signature="e#6737#6738#0" expanded="true" />
-            <element signature="e#6799#6800#0" expanded="true" />
-            <element signature="e#6843#6844#0" expanded="true" />
-            <element signature="e#6898#6899#0" expanded="true" />
-            <element signature="e#6924#6925#0" expanded="true" />
-            <element signature="e#6947#6948#0" expanded="true" />
-            <element signature="e#6979#6980#0" expanded="true" />
-            <element signature="e#7036#7037#0" expanded="true" />
-            <element signature="e#7060#7061#0" expanded="true" />
-            <element signature="e#7090#7091#0" expanded="true" />
-            <element signature="e#7215#7216#0" expanded="true" />
-            <element signature="e#7258#7259#0" expanded="true" />
-            <element signature="e#7285#7286#0" expanded="true" />
-            <element signature="e#7304#7305#0" expanded="true" />
-            <element signature="e#7332#7333#0" expanded="true" />
-            <element signature="e#7352#7353#0" expanded="true" />
-            <element signature="e#7502#7503#0" expanded="true" />
-            <element signature="e#7522#7523#0" expanded="true" />
+            <element signature="e#3746#3747#0" expanded="true" />
+            <element signature="e#3797#3798#0" expanded="true" />
+            <element signature="e#4162#4163#0" expanded="true" />
+            <element signature="e#4238#4239#0" expanded="true" />
+            <element signature="e#4273#4274#0" expanded="true" />
+            <element signature="e#4288#4289#0" expanded="true" />
+            <element signature="e#4321#4322#0" expanded="true" />
+            <element signature="e#4396#4397#0" expanded="true" />
+            <element signature="e#4554#4555#0" expanded="true" />
+            <element signature="e#4618#4619#0" expanded="true" />
+            <element signature="e#7594#7595#0" expanded="true" />
+            <element signature="e#7656#7657#0" expanded="true" />
+            <element signature="e#7700#7701#0" expanded="true" />
+            <element signature="e#7755#7756#0" expanded="true" />
+            <element signature="e#7785#7786#0" expanded="true" />
+            <element signature="e#7808#7809#0" expanded="true" />
+            <element signature="e#7840#7841#0" expanded="true" />
+            <element signature="e#7897#7898#0" expanded="true" />
+            <element signature="e#8070#8071#0" expanded="true" />
+            <element signature="e#8100#8101#0" expanded="true" />
+            <element signature="e#8125#8126#0" expanded="true" />
+            <element signature="e#8170#8171#0" expanded="true" />
+            <element signature="e#8204#8205#0" expanded="true" />
+            <element signature="e#8247#8248#0" expanded="true" />
+            <element signature="e#8274#8275#0" expanded="true" />
+            <element signature="e#8293#8294#0" expanded="true" />
+            <element signature="e#8321#8322#0" expanded="true" />
+            <element signature="e#8341#8342#0" expanded="true" />
+            <element signature="e#8491#8492#0" expanded="true" />
+            <element signature="e#8511#8512#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cnge/core/Base.java">
+    <entry file="file://$PROJECT_DIR$/src/cnge/core/CNGE.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="82" column="25" lean-forward="true" selection-start-line="82" selection-start-column="25" selection-end-line="82" selection-end-column="25" />
+        <state relative-caret-position="257">
+          <caret line="81" column="26" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cnge/core/Screen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="889">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cnge/core/Timer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="28" column="28" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cnge/core/GameLoop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
         </state>
       </provider>
     </entry>

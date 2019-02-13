@@ -1,33 +1,24 @@
 package cnge.graphics;
+import cnge.core.CNGE;
 import org.joml.Matrix4f;
 
-public class Camera {
+public class Camera extends CNGE {
 	
 	private Transform transform;
 	
 	private Matrix4f projection, projectionView;
-	
-	private float defaultWidth;
-	private float defaultHeight;
-	
+
 	public Camera(float w, float h) {
 		transform = new Transform();
 		projectionView = new Matrix4f();
 		setDims(w, h);
 	}
 	
-	public void giveDefaults(float w, float h) {
-		defaultWidth = w;
-		defaultHeight = h;
-	}
-	
 	/**
 	 * sets virtual space back to the dimensions of the game
 	 */
 	public void defaultDims() {
-		transform.setSize(defaultWidth, defaultHeight);
-		projection = new Matrix4f().setOrtho(0, defaultWidth, defaultHeight, 0, 1, -1);
-		update();
+		setDims(gameWidth, gameHeight);
 	}
 	
 	/**
@@ -60,7 +51,7 @@ public class Camera {
 	 * 
 	 * @return the model matrix in world coordiantes
 	 */
-	public Matrix4f getModelMatrix(Transform transform) {
+	public Matrix4f getM(Transform transform) {
 		return new Matrix4f()
 				.translate(transform.x + ((-transform.width * transform.wScale) / 2) + 2 * (transform.width / 2), transform.y + ((-transform.height * transform.hScale) / 2) + 2 * (transform.height / 2), 0)
 				
@@ -70,39 +61,26 @@ public class Camera {
 				
 				.scale(transform.getWidth(), transform.getHeight(), 1);
 	}
-	
-	/*
-	public Matrix4f getModelMatrixRot(Transform transform) {
-		return new Matrix4f()
-				.translate(transform.x + transform.width / 2, transform.y + transform.height / 2, 0)
-				
-				.rotateZ(transform.rotation)
-				
-				.translate(-(transform.width / 2), -(transform.height / 2), 0)
-				
-				.scale(transform.getWidth(), transform.getHeight(), 1);
-	}
-	*/
-	
+
 	/**
 	 * gets a model matrix based on manually inputted bounds.
 	 * If you need something to be as exact as possible
-	 * 
+	 *
 	 * @param left
 	 * @param right
 	 * @param up
 	 * @param down
-	 * 
+	 *
 	 * @return the model matrix in world coordiantes
 	 */
-	public Matrix4f getModelMatrix(float left, float right, float up, float down) {
+	public Matrix4f getMBounds(float left, float right, float up, float down) {
 		return new Matrix4f().translate(left, up, 0).scale(right - left, down - up, 1);
 	}
-	
-	public Matrix4f getModelMatrixDims(float left, float up, float width, float height) {
+
+	public Matrix4f getMDims(float left, float up, float width, float height) {
 		return new Matrix4f().translate(left, up, 0).scale(width , height, 1);
 	}
-	
+
 	
 	/**
 	 * gets the mvp matrix from a certain model matrix
@@ -111,7 +89,7 @@ public class Camera {
 	 * 
 	 * @return the mvp matrix in ndc
 	 */
-	public Matrix4f getModelViewProjectionMatrix(Matrix4f model) {
+	public Matrix4f getMVP(Matrix4f model) {
 		return new Matrix4f(projectionView).mul(model);	
 	}
 	

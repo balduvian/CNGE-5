@@ -6,7 +6,7 @@ import cnge.core.AssetBundle.SceneLoadAction;
 
 abstract public class AssetBundle<S extends Scene<S>> {
 	
-	protected static Base base;
+	//protected static Base base;
 	private S scene;
 	protected LoadAction[] loads;
 	protected SceneLoadAction<S>[] sceneLoads;
@@ -24,7 +24,7 @@ abstract public class AssetBundle<S extends Scene<S>> {
 	
 	public void load() {
 		
-		base.setLoading(loadScreen, true);
+		//base.setLoading(loadScreen, true);
 		
 		int num0 = loads.length;
 		int num1 = sceneLoads.length;
@@ -39,18 +39,18 @@ abstract public class AssetBundle<S extends Scene<S>> {
 			//ok we loaded that now SHOW us
 			loadScreen.setLoaded();
 			
-			base.update();
-			base.render();
+			//base.pollEvents();
+			//base.render();
 		}
 		
 		for(int i = 0; i < num1; ++i) {
 			sceneLoads[i].load(scene);
 			loadScreen.setLoaded();
-			base.update();
-			base.render();
+			//base.pollEvents();
+			//base.render();
 		}
 		
-		base.setLoading(null, false);
+		//base.setLoading(null, false);
 	}
 	
 	public interface LoadAction {
@@ -59,10 +59,6 @@ abstract public class AssetBundle<S extends Scene<S>> {
 	
 	public interface SceneLoadAction<S> {
 		public void load(S s);
-	}
-	
-	public static void giveBase(Base b) {
-		base = b;
 	}
 	
 }

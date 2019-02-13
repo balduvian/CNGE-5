@@ -5,11 +5,9 @@ import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glClearColor;
 
-import cnge.core.Base;
 import cnge.core.Block;
 import cnge.core.BlockSet;
 import cnge.core.Entity;
-import cnge.graphics.Camera;
 import cnge.graphics.FBO;
 import cnge.graphics.Transform;
 import cnge.graphics.texture.Texture;
@@ -206,10 +204,6 @@ abstract public class Map<B extends Block> extends Entity {
 	 * @param y - map coordinate
 	 * 
 	 * @return the block there
-	 * @throws AccessException
-	 * 
-	 * @see atX()
-	 * @see atY()
 	 */
 	public int boundedAccess(int[][] a, int x, int y) {
 		int width_m = a.length - 1;
@@ -234,9 +228,7 @@ abstract public class Map<B extends Block> extends Entity {
 	 * @param y - map coordinate
 	 * 
 	 * @return the block there
-	 * 
-	 * @see atX()
-	 * @see atY()
+	 *
 	 */
 	public static int edgeAccess(int[][] a, int x, int y) {
 		int width_m = a.length - 1;
@@ -261,10 +253,6 @@ abstract public class Map<B extends Block> extends Entity {
 	 * @param y - map coordinate
 	 * 
 	 * @return the block there
-	 * @throws AccessException
-	 * 
-	 * @see atX()
-	 * @see atY()
 	 */
 	public static int horzEdgeAccess(int[][] a, int x, int y) {
 		int width_m = a.length - 1;
@@ -289,10 +277,6 @@ abstract public class Map<B extends Block> extends Entity {
 	 * @param y - map coordinate
 	 * 
 	 * @return the block there
-	 * @throws AccessException
-	 * 
-	 * @see atX()
-	 * @see atY()
 	 */
 	public static int vertEdgeAccess(int[][] a, int x, int y) {
 		int width_m = a.length - 1;
@@ -317,10 +301,6 @@ abstract public class Map<B extends Block> extends Entity {
 	 * @param y - map coordinate
 	 * 
 	 * @return the block there
-	 * @throws AccessException
-	 * 
-	 * @see atX()
-	 * @see atY()
 	 */
 	public static int repeatHorzAccess(int[][] a, int x, int y) {
 		int width = a.length;
@@ -341,9 +321,7 @@ abstract public class Map<B extends Block> extends Entity {
 	 * @param y - map coordinate
 	 * 
 	 * @return the block there
-	 * 
-	 * @see atX()
-	 * @see atY()
+	 *
 	 */
 	public static int repeatAllAccess(int[][] a, int x, int y) {
 		int width = a.length;
@@ -368,7 +346,7 @@ abstract public class Map<B extends Block> extends Entity {
 			}
 		}
 		
-		Base.screenBuffer.enable();
+		//Base.screenBuffer.enable();
 		camera.defaultDims();
         
 		mapRender(new Transform(left * scale, up * scale, acr * scale, dow * scale), mapBuffer.getTexture());

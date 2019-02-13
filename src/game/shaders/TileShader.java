@@ -13,7 +13,7 @@ public class TileShader extends Shader {
 	public TileShader() {
 		super("res/shaders/tile/til2d.vs", "res/shaders/tile/til2d.fs");
 		
-		texLoc = glGetUniformLocation(program, "frame");
+		texLoc = glGetUniformLocation(program, "call");
 		colorLoc = glGetUniformLocation(program, "inColor");
 	}
 	

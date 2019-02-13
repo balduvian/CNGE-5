@@ -14,7 +14,7 @@ public class HueShader extends Shader {
 	public HueShader() {
 		super("res/shaders/hue/hue2d.vs", "res/shaders/hue/hue2d.fs");
 		
-		texLoc = glGetUniformLocation(program, "frame");
+		texLoc = glGetUniformLocation(program, "call");
 		hueLoc = glGetUniformLocation(program, "inHue");
 	}
 	
