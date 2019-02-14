@@ -1,6 +1,6 @@
 package cnge.core.morph;
 
-import cnge.core.GameLoop;
+import cnge.core.Loop;
 import cnge.core.morph.Morph.Interpolator;
 
 public class CustomMorph {
@@ -24,7 +24,7 @@ public class CustomMorph {
 	}
 	
 	public float update() {
-		timer += GameLoop.time;
+		timer += Loop.time;
 		if(timer > time) {
 			timer = time;
 		}

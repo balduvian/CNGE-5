@@ -14,6 +14,8 @@ public class CNGE {
     public static final boolean NEAREST = true;
     public static final boolean BILINEAR = false;
 
+    public static boolean debug;
+
     public static float gameWidth;
     public static float gameHeight;
 
@@ -30,6 +32,7 @@ public class CNGE {
     public static Framer framer;
     public static Screen screen;
     public static ALManagement audio;
+    public static AssetBundle[] assetBundles;
 
     /**
      * initializes the width and height of the game.
@@ -82,6 +85,20 @@ public class CNGE {
         gameBuffer = new FBO(new Texture());
         audio = new ALManagement();
         screen.reFrame(window.getWidth(), window.getHeight());
+    }
+
+    /**
+     * the number of asset bundles that can be used at one time
+     *
+     * @param n
+     */
+    public static void initAssets(int n) {
+        assetBundles = new AssetBundle[n];
+    }
+
+    public static void initDebug(boolean d) {
+        debug = d;
+        Loop.setFpsPrinter();
     }
 
 }

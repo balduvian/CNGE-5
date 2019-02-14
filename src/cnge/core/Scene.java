@@ -4,46 +4,44 @@ import cnge.graphics.Camera;
 import cnge.graphics.Transform;
 import cnge.graphics.Window;
 
-public abstract class Scene<S extends Scene<S>> {
+public abstract class Scene extends CNGE {
 
-	protected static Window window;
-	
-	protected static Camera camera;
-	protected static Transform cameraTransform;
-	
-	protected static int screenWidth;
-	protected static int screenHeight;
-	
-	protected AssetBundle<S> assets;
-	
-	@SuppressWarnings("unchecked")
-	public Scene(AssetBundle<S> a) {
-		assets = a;
-		a.giveScene((S)this);
-	}
-	
-	/*
-	 * static stuff that the base gives to the scene
+	/**
+	 * starts the scene yo
 	 */
-	
-	public Camera getCamera() {
-		return camera;
-	}
-	
-	public static void giveStuff(Camera c, Window w) {
-		camera = c;
-		cameraTransform = c.getTransform();
-		//base = b;
-		window = w;
-	}
-	
-	public static void giveDims(int w, int h) {
-		screenWidth = w;
-		screenHeight = h;
-	}
-	
-	public static void changeScene(Scene s) {
-	//	base.setScene(s);
+	public Scene(LoadScreen loadScreen, int[] dependencies, int sceneLoadsTotal) {
+
+		AssetBundle.resetAlong();
+		int total = sceneLoadsTotal;
+
+		//first we get the length of how many assets will be loaded
+		int dl = dependencies.length;
+		for(int i = 0; i < dl; ++i) {
+			if(assetBundles[dependencies[i]] == null) {
+				total += assetBundles[i].getTotal();
+			}
+		}
+
+		//startup the load screen
+		loadScreen.giveTotal(total);
+		loadScreen.start();
+
+		//now actually load
+		for(int i = 0; i < dl; ++i) {
+			if(assetBundles[dependencies[i]] == null) {
+				assetBundles[i].load(loadScreen);
+			}
+		}
+
+		sceneLoad();
+
+		//shut down load screen
+		try {
+			loadScreen.join();
+		} catch (Exception ex) {}
+		window.threadContextualize();
+
+		sceneStart();
 	}
 	
 	public void setCameraCenter(float x, float y) {
@@ -138,44 +136,16 @@ public abstract class Scene<S extends Scene<S>> {
 	/*
 	 * override this stuff to do stuff with the scene
 	 */
-	
+
+	/**
+	 * will be called before the scene starts, does loads that will still have the load screen on
+	 */
+	abstract protected void sceneLoad();
+
+	abstract protected void sceneStart();
+
 	abstract public void render();
 	
 	abstract public void update();
-	
-	/**
-	 * no longer do you override this
-	 * 
-	 * should all be taken care of in the asset bundle
-	 */
-	public void start() {
-		assets.load();
-	}
-	 
-	abstract public void resizeUpdate();
-	
-	public void cameraLeftLimit(float cx) {
-		if(cameraTransform.x < cx) {
-			cameraTransform.x = cx;
-		}
-	}
-	
-	public void cameraDownLimit(float cy) {
-		if(cameraTransform.y + cameraTransform.height > cy) {
-			cameraTransform.y = cy - cameraTransform.height;
-		}
-	}
-	
-	public void cameraRightLimit(float cx) {
-		if(cameraTransform.x + cameraTransform.width > cx) {
-			cameraTransform.x = cx - cameraTransform.width;
-		}
-	}
-	
-	public void cameraUpLimit(float cy) {
-		if(cameraTransform.y < cy) {
-			cameraTransform.y = cy;
-		}
-	}
 	
 }

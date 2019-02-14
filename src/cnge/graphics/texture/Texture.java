@@ -184,4 +184,5 @@ public class Texture {
 	public int getHeight() {
 		return height;
 	}
+
 }

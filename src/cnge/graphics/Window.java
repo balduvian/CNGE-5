@@ -28,6 +28,7 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
 
@@ -131,8 +132,8 @@ public class Window extends CNGE {
 
 		reWindow();
 
-		glfwMakeContextCurrent(window);
-		createCapabilities();
+		threadContextualize();
+		threadMakeContext();
 
 		glfwSwapInterval(vSync ? 1 : 0);
 
@@ -155,6 +156,14 @@ public class Window extends CNGE {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		return this;
+	}
+
+	public void threadMakeContext() {
+		createCapabilities();
+	}
+
+	public void threadContextualize() {
+		glfwMakeContextCurrent(window);
 	}
 
 	public void calcFramerate() {

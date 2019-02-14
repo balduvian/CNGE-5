@@ -2,10 +2,7 @@ package game;
 
 import java.io.IOException;
 
-import cnge.core.BaseShader;
-import cnge.core.CNGE;
-import cnge.core.GameLoop;
-import cnge.core.Screen;
+import cnge.core.*;
 import cnge.graphics.FBO;
 import cnge.graphics.Shader;
 import cnge.graphics.Transform;
@@ -14,7 +11,6 @@ import cnge.graphics.shapes.RectShape;
 import cnge.graphics.texture.Texture;
 import cnge.graphics.texture.TexturePreset;
 import game.shaders.ColorShader;
-import org.w3c.dom.Text;
 
 public class Main {
 	
@@ -43,9 +39,8 @@ public class Main {
 	}
 
 	BaseShader baseShader;
-    RectShape rect;
-    ColorShader colorShader;
-	Texture tt;
+	RectShape rect;
+	Scene scene;
 
 	private Main() {
 		CNGE.initGameSize(160, 90);
@@ -55,20 +50,17 @@ public class Main {
 
 		baseShader = new BaseShader();
 		rect = new RectShape();
-		colorShader = new ColorShader();
 
-		tt = new Texture("res/icon.png", new TexturePreset());
-
-		new GameLoop(this::frame).run(true);
+		scene
+		new Loop(this::frame).gameRun();
 	}
 
 	private void frame() {
 		CNGE.window.pollEvents();
 
+		scene.update();
+
 		CNGE.camera.update();
-
-
-		//TODO update
 
         CNGE.gameBuffer.enable();
         Window.clear(1, 0, 0, 1);
@@ -93,17 +85,7 @@ public class Main {
 
 	Transform bt = new Transform(20, 20, 20, 20);
 
-	private void render() {
-
-        colorShader.enable();
-
-        colorShader.setMvp(CNGE.camera.getMVP(CNGE.camera.getM(bt)));
-
-        colorShader.setUniforms(1, 0, 1, 1);
-
-        rect.render();
-
-        Shader.disable();
-	}
+	float vx = 10;
+	float vy = 10;
 
 }

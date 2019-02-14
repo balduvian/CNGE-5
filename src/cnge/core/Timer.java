@@ -25,7 +25,7 @@ public class Timer {
 	
 	public void update() {
 		if(going) {
-			timer -= GameLoop.time;
+			timer -= Loop.time;
 			if(timer <= 0) {
 				timer = 0;
 				going = false;

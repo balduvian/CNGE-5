@@ -1,31 +1,26 @@
 package cnge.core;
 
-import cnge.graphics.Camera;
+abstract public class LoadScreen extends Thread {
 
-abstract public class LoadScreen {
-	
-	private Camera camera;
-	
-	private int soFar;
-	private int goal;
-	
-	public void render() {
-		loadRender(camera, soFar, goal);
-	}
-	
-	abstract protected void loadRender(Camera camera, int soFar, int goal);
-	
-	public void giveCamera(Camera c) {
-		camera = c;
-	}
-	
-	public void startLoad(int g) {
-		soFar = 0;
-		goal = g;
-	}
-	
-	public void setLoaded() {
-		++soFar;
-	}
-	
+    protected int total;
+
+    private Loop loaderLoop;
+
+    public void giveTotal(int t) {
+        total = t;
+    }
+
+    abstract protected void loadRender(int along, int total);
+
+    public void run() {
+        CNGE.window.threadMakeContext();
+        loaderLoop = new Loop(this::loadRender);
+        CNGE.window.threadContextualize();
+        loaderLoop.loadRun(total);
+    }
+
+    public void endLoad() {
+        loaderLoop.setRunning(false);
+    }
+
 }

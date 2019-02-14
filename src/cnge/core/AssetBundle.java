@@ -1,64 +1,52 @@
 package cnge.core;
 
-import java.lang.reflect.Array;
+abstract public class AssetBundle {
 
-import cnge.core.AssetBundle.SceneLoadAction;
+	private static int along;
+	protected int subTotal;
 
-abstract public class AssetBundle<S extends Scene<S>> {
-	
-	//protected static Base base;
-	private S scene;
-	protected LoadAction[] loads;
-	protected SceneLoadAction<S>[] sceneLoads;
-	protected LoadScreen loadScreen;
-	
-	public AssetBundle(LoadScreen s, LoadAction[] l, SceneLoadAction<S>... c) {
-		loadScreen = s;
-		loads = l;
-		sceneLoads = c;
+	/**
+	 * makes a new type of assetbundle, call this in a super for extention bundles
+	 *
+	 * @param st - the total number of assets to load in this bundle
+	 */
+	public AssetBundle(int st) {
+		subTotal = st;
 	}
-	
-	public void giveScene(S s) {
-		scene = s;
+
+	public int getTotal() {
+		return subTotal;
 	}
-	
-	public void load() {
-		
-		//base.setLoading(loadScreen, true);
-		
-		int num0 = loads.length;
-		int num1 = sceneLoads.length;
-		loadScreen.startLoad(num0 + num1);
-		
-		//do an initial render with nothing loaded so far
-		loadScreen.render();
-		
-		//do all of our loads
-		for(int i = 0; i < num0; ++i) {
-			loads[i].load();
-			//ok we loaded that now SHOW us
-			loadScreen.setLoaded();
-			
-			//base.pollEvents();
-			//base.render();
-		}
-		
-		for(int i = 0; i < num1; ++i) {
-			sceneLoads[i].load(scene);
-			loadScreen.setLoaded();
-			//base.pollEvents();
-			//base.render();
-		}
-		
-		//base.setLoading(null, false);
+
+	public static int getAlong() {
+		return along;
 	}
-	
-	public interface LoadAction {
-		public void load();
+
+	public static void resetAlong() {
+		along = 0;
 	}
-	
-	public interface SceneLoadAction<S> {
-		public void load(S s);
+
+	public void load(LoadScreen l) {
+		l.start();
+
+		loadRoutine();
+
+		l.endLoad();
+		try {
+			l.join();
+		} catch(Exception ex) { System.exit(-3); }
 	}
-	
+
+	public void unLoad() {
+		unLoadRoutine();
+	}
+
+	abstract protected void loadRoutine();
+
+	abstract protected void unLoadRoutine();
+
+	public void doLoad(Object... asset) {
+		++along;
+	}
+
 }

@@ -1,6 +1,6 @@
 package cnge.core.morph;
 
-import cnge.core.GameLoop;
+import cnge.core.Loop;
 import cnge.graphics.Transform;
 
 public class Morph {
@@ -171,7 +171,7 @@ public class Morph {
 	 * @return TRUE if it's done
 	 */
 	public boolean update() {
-		timer += GameLoop.time;
+		timer += Loop.time;
 		
 		if(timer > time) {
 			timer = time;

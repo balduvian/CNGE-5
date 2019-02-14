@@ -1,6 +1,6 @@
 package cnge.core.animation;
 
-import cnge.core.GameLoop;
+import cnge.core.Loop;
 
 abstract public class Anim {
 	
@@ -25,7 +25,7 @@ abstract public class Anim {
 	abstract public int getX();
 	
 	public void update() {
-		timer += GameLoop.time;
+		timer += Loop.time;
 		if(timer >= frameTimes[frame]) {
 			++frame;
 			frame %= numFrames;
