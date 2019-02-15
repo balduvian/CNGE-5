@@ -2,11 +2,14 @@ package cnge.core;
 
 abstract public class LoadScreen extends Thread {
 
+    private Loop loaderLoop;
     protected int total;
 
-    private Loop loaderLoop;
-
-    public void giveTotal(int t) {
+    /**
+     * the scene will do this for you
+     */
+    public void setup(int t) {
+        loaderLoop = new Loop();
         total = t;
     }
 
@@ -14,9 +17,8 @@ abstract public class LoadScreen extends Thread {
 
     public void run() {
         CNGE.window.threadMakeContext();
-        loaderLoop = new Loop(this::loadRender);
         CNGE.window.threadContextualize();
-        loaderLoop.loadRun(total);
+        loaderLoop.loadRun(this::loadRender, total);
     }
 
     public void endLoad() {

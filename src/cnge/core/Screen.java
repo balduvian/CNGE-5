@@ -1,9 +1,6 @@
 package cnge.core;
 
-import cnge.graphics.FBO;
-import cnge.graphics.Shader;
-import cnge.graphics.Window;
-import cnge.graphics.shapes.RectShape;
+import cnge.core.interfaces.Framer;
 import cnge.graphics.texture.Texture;
 import cnge.graphics.texture.TexturePreset;
 

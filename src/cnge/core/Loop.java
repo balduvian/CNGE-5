@@ -1,11 +1,14 @@
 package cnge.core;
 
+import cnge.core.interfaces.LoadSubLooper;
+import cnge.core.interfaces.SubLooper;
+
 public class Loop extends CNGE {
 
     /*
      * the fps printer is above all
      */
-    private static GameCall fpsPrinter;
+    private static VoidCall fpsPrinter;
 
     /*
      * external time variables
@@ -24,35 +27,16 @@ public class Loop extends CNGE {
     private long now;
     private boolean running;
 
-    /*
-     * interfaces
-     */
-    private GameCall gameCall;
-    private LoadCall loadCall;
-
-    public interface GameCall {
+    private interface VoidCall {
         void call();
-    }
-
-    public interface LoadCall {
-        void call(int along, int total);
     }
 
     public static void setFpsPrinter() {
         fpsPrinter = debug ? PRINT_FPS : NO_PRINT_FPS;
     }
 
-    public Loop(GameCall gc) {
-        init(gc, null);
-    }
+    public Loop() {
 
-    public Loop(LoadCall lc) {
-        init(null, lc);
-    }
-
-    private void init(GameCall gc, LoadCall lc) {
-        gameCall = gc;
-        loadCall = lc;
     }
 
     private void beginLoop() {
@@ -64,7 +48,7 @@ public class Loop extends CNGE {
         running = true;
     }
 
-    private boolean check1() {
+    private boolean shouldDoFrame() {
         now = System.nanoTime();
         if(now-last > usingFPS) {
             nanos = (now-last);
@@ -76,7 +60,7 @@ public class Loop extends CNGE {
         return false;
     }
 
-    private void check2() {
+    private void checkSecondHasPassed() {
         if(now-lastSec > 1000000000) {
             fps = frames;
             frames = 0;
@@ -85,31 +69,28 @@ public class Loop extends CNGE {
         }
     }
 
-    public void gameRun() {
+    public void gameRun(SubLooper update, SubLooper render) {
         beginLoop();
         while(!window.shouldClose()) {
-           if(check1())
-               gameCall.call();
-           check2();
+           if(shouldDoFrame())
+               CNGE.looper.loop(update, render);
+           checkSecondHasPassed();
         }
     }
 
-    public void loadRun(int total) {
+    public void loadRun(LoadSubLooper lsl, int total) {
         beginLoop();
         while(running) {
-            if(check1())
-                loadCall.call(AssetBundle.getAlong(), total);
-            check2();
+            if(shouldDoFrame())
+                CNGE.loadLooper.loadLoop(lsl, AssetBundle.getAlong(), total);
+            checkSecondHasPassed();
         }
     }
 
-    public static final GameCall PRINT_FPS = () -> {
-        System.out.println(fps);
-    };
+    public static final VoidCall PRINT_FPS = () -> System.out.println(fps);
 
-    public static final GameCall NO_PRINT_FPS = () -> {
-        //haha you get nothing, you lose
-    };
+
+    public static final VoidCall NO_PRINT_FPS = () -> {};
 
     public void setRunning(boolean r) {
         running = r;

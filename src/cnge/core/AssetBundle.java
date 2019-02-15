@@ -4,6 +4,7 @@ abstract public class AssetBundle {
 
 	private static int along;
 	protected int subTotal;
+	private boolean loaded;
 
 	/**
 	 * makes a new type of assetbundle, call this in a super for extention bundles
@@ -12,6 +13,7 @@ abstract public class AssetBundle {
 	 */
 	public AssetBundle(int st) {
 		subTotal = st;
+		loaded = false;
 	}
 
 	public int getTotal() {
@@ -26,18 +28,17 @@ abstract public class AssetBundle {
 		along = 0;
 	}
 
-	public void load(LoadScreen l) {
-		l.start();
+	public boolean getLoaded() {
+		return loaded;
+	}
 
+	public void load() {
+		loaded = true;
 		loadRoutine();
-
-		l.endLoad();
-		try {
-			l.join();
-		} catch(Exception ex) { System.exit(-3); }
 	}
 
 	public void unLoad() {
+		loaded = false;
 		unLoadRoutine();
 	}
 
@@ -45,7 +46,7 @@ abstract public class AssetBundle {
 
 	abstract protected void unLoadRoutine();
 
-	public void doLoad(Object... asset) {
+	public static void doLoad(Object... asset) {
 		++along;
 	}
 

@@ -1,10 +1,13 @@
 package cnge.core;
 
+import cnge.core.interfaces.Framer;
+import cnge.core.interfaces.LoadLooper;
+import cnge.core.interfaces.Looper;
+import cnge.core.interfaces.SubLooper;
 import cnge.graphics.ALManagement;
 import cnge.graphics.Camera;
 import cnge.graphics.FBO;
 import cnge.graphics.Window;
-import cnge.graphics.shapes.RectShape;
 import cnge.graphics.texture.Texture;
 
 public class CNGE {
@@ -33,6 +36,9 @@ public class CNGE {
     public static Screen screen;
     public static ALManagement audio;
     public static AssetBundle[] assetBundles;
+
+    public static Looper looper;
+    public static LoadLooper loadLooper;
 
     /**
      * initializes the width and height of the game.
@@ -99,6 +105,20 @@ public class CNGE {
     public static void initDebug(boolean d) {
         debug = d;
         Loop.setFpsPrinter();
+    }
+
+    public static void initLooper(Looper l, LoadLooper ll) {
+        looper = l;
+        loadLooper = ll;
+    }
+
+    /**
+     * make all the asset bundles immediately and store themm
+     *
+     * @param abs - the array of assetbundles
+     */
+    public static void initAssetBundles(AssetBundle... abs) {
+        assetBundles = abs;
     }
 
 }

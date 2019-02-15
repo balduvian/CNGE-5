@@ -9,38 +9,49 @@ public abstract class Scene extends CNGE {
 	/**
 	 * starts the scene yo
 	 */
-	public Scene(LoadScreen loadScreen, int[] dependencies, int sceneLoadsTotal) {
+	public Scene(LoadScreen loadScreen, int sceneLoadsTotal, Class<? extends AssetBundle>... bundleClasses) {
 
+		//start to calculate how many things will need to be loaded in
 		AssetBundle.resetAlong();
 		int total = sceneLoadsTotal;
 
-		//first we get the length of how many assets will be loaded
-		int dl = dependencies.length;
+		int along = 0;
+		int al = assetBundles.length;
+		int dl = bundleClasses.length;
+		AssetBundle[] dependencies = new AssetBundle[dl];
+
+		//get which assetbundles we are loading, also calculate the total amount of assets to load
 		for(int i = 0; i < dl; ++i) {
-			if(assetBundles[dependencies[i]] == null) {
-				total += assetBundles[i].getTotal();
+			Class<? extends AssetBundle> bClass = bundleClasses[i];
+			for(int j = 0; j < al; ++j) {
+				AssetBundle ab = assetBundles[j];
+				if(bClass == ab.getClass()) {
+					total += ab.getTotal();
+					dependencies[along++] = ab;
+				}
 			}
 		}
 
 		//startup the load screen
-		loadScreen.giveTotal(total);
+		loadScreen.setup(total);
 		loadScreen.start();
 
-		//now actually load
+		//now actually load the assetbundles
 		for(int i = 0; i < dl; ++i) {
-			if(assetBundles[dependencies[i]] == null) {
-				assetBundles[i].load(loadScreen);
-			}
+			dependencies[i].load();
 		}
 
+		//now load stuff for the scene
 		sceneLoad();
 
 		//shut down load screen
+		loadScreen.endLoad();
 		try {
 			loadScreen.join();
 		} catch (Exception ex) {}
 		window.threadContextualize();
 
+		//start the scene finna
 		sceneStart();
 	}
 	
