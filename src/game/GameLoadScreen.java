@@ -4,6 +4,7 @@ import cnge.core.CNGE;
 import cnge.core.LoadScreen;
 import cnge.graphics.Camera;
 import cnge.graphics.Shader;
+import cnge.graphics.Window;
 import cnge.graphics.shapes.RectShape;
 import game.shaders.ColorShader;
 
@@ -36,6 +37,8 @@ public class GameLoadScreen extends LoadScreen {
     @Override
     protected void loadRender(int along, int total) {
         Camera cam = CNGE.camera;
+
+        Window.clear(0, 0, 0, 1);
 
         colorShader.enable();
 

@@ -93,15 +93,6 @@ public class CNGE {
         screen.reFrame(window.getWidth(), window.getHeight());
     }
 
-    /**
-     * the number of asset bundles that can be used at one time
-     *
-     * @param n
-     */
-    public static void initAssets(int n) {
-        assetBundles = new AssetBundle[n];
-    }
-
     public static void initDebug(boolean d) {
         debug = d;
         Loop.setFpsPrinter();

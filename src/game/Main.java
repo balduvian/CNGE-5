@@ -10,6 +10,7 @@ import cnge.graphics.Shader;
 import cnge.graphics.Window;
 import cnge.graphics.shapes.RectShape;
 import cnge.graphics.texture.Texture;
+import game.shaders.TextureShader;
 
 public class Main {
 
@@ -18,12 +19,13 @@ public class Main {
 	Scene scene;
 
 	protected Main() {
-		CNGE.initGameSize(160, 90);
+		CNGE.initGameSize(256, 144);
 		CNGE.initScreenMode(Screen.makeAspectScreen(), -1);
 		CNGE.initTextureDefaults(CNGE.WRAP, CNGE.WRAP, CNGE.NEAREST, CNGE.NEAREST);
 		CNGE.initWindow(new Window().initFull(false).initName("here we go").initIcon("res/icon.png").init());
 		CNGE.initLooper(this::frame, this::loopFrame);
 		CNGE.initAssetBundles(new GameAssets());
+		CNGE.initDebug(true);
 
 		baseShader = new BaseShader();
 		rect = new RectShape();

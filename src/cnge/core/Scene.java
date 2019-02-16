@@ -33,7 +33,8 @@ public abstract class Scene extends CNGE {
 		}
 
 		//startup the load screen
-		loadScreen.setup(total);
+		window.threadUnContextualize();
+		loadScreen.setup(window, total);
 		loadScreen.start();
 
 		//now actually load the assetbundles
@@ -44,11 +45,18 @@ public abstract class Scene extends CNGE {
 		//now load stuff for the scene
 		sceneLoad();
 
-		//shut down load screen
-		loadScreen.endLoad();
+		//wait till loadscreen is done
+		while(loadScreen.isGoing()) {
+			try {
+				Thread.sleep(1);
+			} catch (Exception ex) { }
+		}
+
+		//wait to shut down load screen
 		try {
 			loadScreen.join();
-		} catch (Exception ex) {}
+		} catch (Exception ex) { }
+
 		window.threadContextualize();
 
 		//start the scene finna

@@ -1,6 +1,7 @@
 package cnge.graphics;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL.createCapabilities;
+import static org.lwjgl.opengl.GL.setCapabilities;
 import static org.lwjgl.opengl.GL11.GL_BLEND;
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
@@ -133,7 +134,7 @@ public class Window extends CNGE {
 		reWindow();
 
 		threadContextualize();
-		threadMakeContext();
+		threadCreateCapabilties();
 
 		glfwSwapInterval(vSync ? 1 : 0);
 
@@ -158,12 +159,16 @@ public class Window extends CNGE {
 		return this;
 	}
 
-	public void threadMakeContext() {
-		createCapabilities();
+	public void threadUnContextualize() {
+		glfwMakeContextCurrent(0L);
 	}
 
 	public void threadContextualize() {
 		glfwMakeContextCurrent(window);
+	}
+
+	public void threadCreateCapabilties() {
+		createCapabilities();
 	}
 
 	public void calcFramerate() {

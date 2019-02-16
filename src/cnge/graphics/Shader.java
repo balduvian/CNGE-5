@@ -6,8 +6,11 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.IntBuffer;
 
 import org.joml.Matrix4f;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL20;
 
 abstract public class Shader {
 	
@@ -60,12 +63,14 @@ abstract public class Shader {
 		glShaderSource(shader, src);
 		
 		glCompileShader(shader);
-		if(glGetShaderi(shader,GL_COMPILE_STATUS) != 1) {
-			throw new RuntimeException("Failed to compile shader | " + path + " | " + type + " | " + glGetShaderInfoLog(shader));
+
+		if(glGetShaderi(shader, GL_COMPILE_STATUS) != 1) {
+			System.err.println(glGetProgramInfoLog(shader, glGetProgrami(shader, GL_INFO_LOG_LENGTH)));
+			throw new RuntimeException("Failed to compile shader | " + path + " | " + type + " | " + glGetShaderInfoLog(shader) + " PPP ");
 		}
 		return shader;
 	}
-	
+
 	public void setMvp(Matrix4f mvp) {
 		glUniformMatrix4fv(mvpLoc, false, mvp.get(new float[16]));
 	}

@@ -81,8 +81,13 @@ public class Loop extends CNGE {
     public void loadRun(LoadSubLooper lsl, int total) {
         beginLoop();
         while(running) {
-            if(shouldDoFrame())
-                CNGE.loadLooper.loadLoop(lsl, AssetBundle.getAlong(), total);
+            if(shouldDoFrame()) {
+                int along = AssetBundle.getAlong();
+                CNGE.loadLooper.loadLoop(lsl, along, total);
+                if (along == total) {
+                    break;
+                }
+            }
             checkSecondHasPassed();
         }
     }
