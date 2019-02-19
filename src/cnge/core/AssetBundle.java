@@ -3,8 +3,23 @@ package cnge.core;
 abstract public class AssetBundle {
 
 	private static int along;
+	private static int total;
+	private static LoadScreen loadScreen;
+
 	protected int subTotal;
-	private boolean loaded;
+
+	/**
+	 * sets up a load session, with the loadscreen to use, and the total number of assets for this session,
+	 * also resets the along variable
+	 *
+	 * @param l - loadscreen
+	 * @param t - total
+	 */
+	public static void setup(LoadScreen l, int t) {
+		loadScreen = l;
+		total = t;
+		along = 0;
+	}
 
 	/**
 	 * makes a new type of assetbundle, call this in a super for extention bundles
@@ -13,41 +28,21 @@ abstract public class AssetBundle {
 	 */
 	public AssetBundle(int st) {
 		subTotal = st;
-		loaded = false;
 	}
 
 	public int getTotal() {
 		return subTotal;
 	}
 
-	public static int getAlong() {
-		return along;
-	}
+	abstract public void loadRoutine();
 
-	public static void resetAlong() {
-		along = 0;
-	}
+	abstract public void unLoadRoutine();
 
-	public boolean getLoaded() {
-		return loaded;
-	}
-
-	public void load() {
-		loaded = true;
-		loadRoutine();
-	}
-
-	public void unLoad() {
-		loaded = false;
-		unLoadRoutine();
-	}
-
-	abstract protected void loadRoutine();
-
-	abstract protected void unLoadRoutine();
-
+	@SuppressWarnings("unused")
 	public static void doLoad(Object... asset) {
-		++along;
+		//first it lods the asset
+		//then it renders that it has loaded
+		loadScreen.loadRender(++along, total);
 	}
 
 }

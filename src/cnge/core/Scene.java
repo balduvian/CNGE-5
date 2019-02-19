@@ -1,8 +1,6 @@
 package cnge.core;
 
-import cnge.graphics.Camera;
 import cnge.graphics.Transform;
-import cnge.graphics.Window;
 
 public abstract class Scene extends CNGE {
 
@@ -12,7 +10,6 @@ public abstract class Scene extends CNGE {
 	public Scene(LoadScreen loadScreen, int sceneLoadsTotal, Class<? extends AssetBundle>... bundleClasses) {
 
 		//start to calculate how many things will need to be loaded in
-		AssetBundle.resetAlong();
 		int total = sceneLoadsTotal;
 
 		int along = 0;
@@ -32,32 +29,17 @@ public abstract class Scene extends CNGE {
 			}
 		}
 
-		//startup the load screen
-		window.threadUnContextualize();
-		loadScreen.setup(window, total);
-		loadScreen.start();
+		//start loadscreen
+		loadScreen.setup(total);
+		AssetBundle.setup(loadScreen, total);
 
 		//now actually load the assetbundles
 		for(int i = 0; i < dl; ++i) {
-			dependencies[i].load();
+			dependencies[i].loadRoutine();
 		}
 
 		//now load stuff for the scene
 		sceneLoad();
-
-		//wait till loadscreen is done
-		while(loadScreen.isGoing()) {
-			try {
-				Thread.sleep(1);
-			} catch (Exception ex) { }
-		}
-
-		//wait to shut down load screen
-		try {
-			loadScreen.join();
-		} catch (Exception ex) { }
-
-		window.threadContextualize();
 
 		//start the scene finna
 		sceneStart();

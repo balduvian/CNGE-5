@@ -25,7 +25,6 @@ public class Loop extends CNGE {
     private long lastSec;
     private int frames;
     private long now;
-    private boolean running;
 
     private interface VoidCall {
         void call();
@@ -35,17 +34,12 @@ public class Loop extends CNGE {
         fpsPrinter = debug ? PRINT_FPS : NO_PRINT_FPS;
     }
 
-    public Loop() {
-
-    }
-
     private void beginLoop() {
         usingFPS = 1000000000 / framerate;
         last = System.nanoTime();
         lastSec = last;
         frames = 0;
         now = 0;
-        running = true;
     }
 
     private boolean shouldDoFrame() {
@@ -69,7 +63,7 @@ public class Loop extends CNGE {
         }
     }
 
-    public void gameRun(SubLooper update, SubLooper render) {
+    public void run(SubLooper update, SubLooper render) {
         beginLoop();
         while(!window.shouldClose()) {
            if(shouldDoFrame())
@@ -78,27 +72,9 @@ public class Loop extends CNGE {
         }
     }
 
-    public void loadRun(LoadSubLooper lsl, int total) {
-        beginLoop();
-        while(running) {
-            if(shouldDoFrame()) {
-                int along = AssetBundle.getAlong();
-                CNGE.loadLooper.loadLoop(lsl, along, total);
-                if (along == total) {
-                    break;
-                }
-            }
-            checkSecondHasPassed();
-        }
-    }
-
     public static final VoidCall PRINT_FPS = () -> System.out.println(fps);
 
 
     public static final VoidCall NO_PRINT_FPS = () -> {};
-
-    public void setRunning(boolean r) {
-        running = r;
-    }
 
 }
