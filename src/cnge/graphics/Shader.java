@@ -12,7 +12,7 @@ import org.joml.Matrix4f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;
 
-abstract public class Shader {
+abstract public class Shader implements Destroyable {
 	
 	/**
 	 * the program ID of the shader
@@ -102,8 +102,9 @@ abstract public class Shader {
 	/**
 	 * deletes the shader from opengl
 	 */
-	public void destroy() {
+	public Void destroy() {
 		glDeleteProgram(program);
+		return null;
 	}
 
 }

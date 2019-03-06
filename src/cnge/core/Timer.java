@@ -5,22 +5,15 @@ package cnge.core;
  * @author Emmett
  *
  */
-public class Timer {
+public abstract class Timer {
 	
 	private double time;
 	private double timer;
 	
 	private boolean going;
 	
-	private TimerEvent event;
-	
-	public Timer(double t, TimerEvent e) {
+	public Timer(double t) {
 		time = t;
-		event = e;
-	}
-	
-	public interface TimerEvent {
-		public void event();
 	}
 	
 	public void update() {
@@ -29,7 +22,6 @@ public class Timer {
 			if(timer <= 0) {
 				timer = 0;
 				going = false;
-				event.event();
 			}
 		}
 	}
@@ -64,8 +56,8 @@ public class Timer {
 		return 1 - (float)(timer / time);
 	}
 
-	public boolean paused() {
-		return !going;
+	public boolean isGoing() {
+		return going;
 	}
-	
+
 }

@@ -6,6 +6,8 @@ import cnge.graphics.texture.Texture;
 import cnge.graphics.texture.TexturePreset;
 import game.shaders.TextureShader;
 
+import static cnge.graphics.texture.TexturePreset.TP;
+
 public class GameAssets extends AssetBundle {
 
     public static final int GAME_ASSETS_LOAD_NUMBER = 3;
@@ -27,18 +29,17 @@ public class GameAssets extends AssetBundle {
     }
 
     @Override
-    protected void loadRoutine() {
-        //doLoad(lagTexture = new Texture("res/icon.png", new TexturePreset()));
-       // doLoad(textureShader = new TextureShader());
-        //doLoad(rect = new RectShape());
-        doLoad();
-        doLoad();
+    public void loadRoutine() {
+        doLoad(lagTexture = new Texture("res/icon.png", TP()));
+        doLoad(textureShader = new TextureShader());
         doLoad(rect = new RectShape());
     }
 
     @Override
-    protected void unLoadRoutine() {
-
+    public void unLoadRoutine() {
+        doLoad(lagTexture.destroy());
+        doLoad(textureShader.destroy());
+        doLoad(rect.destroy());
     }
 
 }

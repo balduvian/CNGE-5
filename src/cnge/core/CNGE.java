@@ -1,14 +1,12 @@
 package cnge.core;
 
-import cnge.core.interfaces.Framer;
-import cnge.core.interfaces.LoadLooper;
-import cnge.core.interfaces.Looper;
-import cnge.core.interfaces.SubLooper;
+import cnge.core.interfaces.*;
 import cnge.graphics.ALManagement;
 import cnge.graphics.Camera;
 import cnge.graphics.FBO;
 import cnge.graphics.Window;
 import cnge.graphics.texture.Texture;
+import cnge.graphics.texture.TexturePreset;
 
 public class CNGE {
 
@@ -22,11 +20,6 @@ public class CNGE {
     public static float gameWidth;
     public static float gameHeight;
 
-    public static boolean defaultClampHorz;
-    public static boolean defaultClampVert;
-    public static boolean defaultMagInterp;
-    public static boolean defaultMinInterp;
-
     public static int framerate;
 
     public static Window window;
@@ -37,9 +30,8 @@ public class CNGE {
     public static ALManagement audio;
     public static AssetBundle[] assetBundles;
 
-    public static Looper looper;
-    public static LoadLooper loadLooper;
-
+    public static Looper updateRender;
+    public static LoadLooper loadRender;
     /**
      * initializes the width and height of the game.
      * this is the most crucial piece of information on which,
@@ -51,21 +43,6 @@ public class CNGE {
     public static void initGameSize(float width, float height) {
         gameWidth = width;
         gameHeight = height;
-    }
-
-    /**
-     * initializes default values in texture creation
-     *
-     * @param ch - deafult clamp horizontal
-     * @param cv - deafult clamp vertical
-     * @param gi - default mag interpolation
-     * @param ni - deafult min interpolation
-     */
-    public static void initTextureDefaults(boolean ch, boolean cv, boolean gi, boolean ni) {
-        defaultClampHorz = ch;
-        defaultClampVert = cv;
-        defaultMagInterp = gi;
-        defaultMinInterp = ni;
     }
 
     /**
@@ -98,9 +75,9 @@ public class CNGE {
         Loop.setFpsPrinter();
     }
 
-    public static void initLooper(Looper l, LoadLooper ll) {
-        looper = l;
-        loadLooper = ll;
+    public static void initLoopers(Looper ur, LoadLooper r) {
+        updateRender = ur;
+        loadRender = r;
     }
 
     /**

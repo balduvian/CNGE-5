@@ -30,7 +30,6 @@ public abstract class Scene extends CNGE {
 		}
 
 		//start loadscreen
-		loadScreen.setup(total);
 		AssetBundle.setup(loadScreen, total);
 
 		//now actually load the assetbundles
@@ -106,7 +105,7 @@ public abstract class Scene extends CNGE {
 	 * renders an entity, checking whether its on screen.
 	 * USE FOR ENTITIES THAT WILL NEVER BE NULL
 	 * 
-	 * @param e - the entity to render
+	 * @param e - the entity to loadRender
 	 */
 	public void eRender_O(Entity e) {
 		if(e.onScreen) {
@@ -126,7 +125,7 @@ public abstract class Scene extends CNGE {
 	/**
 	 * renders an entity, but checks if it's null first
 	 * 
-	 * @param e - the entity to render
+	 * @param e - the entity to loadRender
 	 */
 	public void eRender_OS(Entity e) {
 		if(e != null && e.onScreen) {

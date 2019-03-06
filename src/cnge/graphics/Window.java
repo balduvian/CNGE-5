@@ -265,7 +265,7 @@ public class Window extends CNGE {
 	}
 	
 	/**
-	 * saves a bufferedimage of the current render buffer
+	 * saves a bufferedimage of the current loadRender buffer
 	 * performance = bad
 	 */
 	public void takeScreenShot(int scw, int sch) {

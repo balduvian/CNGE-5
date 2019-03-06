@@ -1,6 +1,6 @@
 package cnge.core;
 
-abstract public class AssetBundle {
+abstract public class AssetBundle extends CNGE {
 
 	private static int along;
 	private static int total;
@@ -38,11 +38,13 @@ abstract public class AssetBundle {
 
 	abstract public void unLoadRoutine();
 
+	/**
+	 * this method consolidates loading an object, and calling the loadscreen to loadRender
+	 * @param asset
+	 */
 	@SuppressWarnings("unused")
 	public static void doLoad(Object... asset) {
-		//first it lods the asset
-		//then it renders that it has loaded
-		loadScreen.loadRender(++along, total);
+		loadRender.loadLoop(loadScreen::loadRender, ++along, total);
 	}
 
 }

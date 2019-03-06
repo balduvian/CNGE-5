@@ -84,7 +84,8 @@ abstract public class Map<B extends Block> extends Entity {
 		Transform t = camera.getTransform();
 		acr = (int)Math.ceil(t.getWidth() / scale) + 1;
 		dow = (int)Math.ceil(t.getHeight() / scale) + 1;
-		mapBuffer.replaceTexture(new Texture(acr * scale, dow * scale));
+		mapBuffer.getTexture().resize(acr * scale, dow * scale);
+		mapBuffer.resize();
 	}
 	
 	/**
@@ -353,7 +354,7 @@ abstract public class Map<B extends Block> extends Entity {
 	}
 	
 	/**
-	 * the default inherited render method from entity is not used
+	 * the default inherited loadRender method from entity is not used
 	 * 
 	 * @deprecated FUCK FUCK FUCK FUCK DONT USE THIS METHOD
 	 * 

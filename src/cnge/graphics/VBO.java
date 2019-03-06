@@ -59,9 +59,9 @@ public class VBO {
 		glDrawElements(mode, count, GL_UNSIGNED_INT, 0);
 	}
 	
-	public void destroy() {
-		for(int vbo: attribs) {
-			glDeleteBuffers(vbo);
+	protected void destroy() {
+		for(int i = 0; i < numAttribs; ++i) {
+			glDeleteBuffers(attribs[i]);
 		}
 		glDeleteBuffers(ibo);
 		glDeleteVertexArrays(vao);

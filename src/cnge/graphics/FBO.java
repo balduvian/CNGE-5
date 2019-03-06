@@ -58,24 +58,20 @@ public class FBO extends CNGE {
     }
 
     /**
-     * binds a new replacement texture to the fbo
-     * 
-     * @param tex - the motherfuckin texture
+     * after the texture has been changed, call this to adapt the framebuffer
      */
-    public void replaceTexture(Texture tex) {
-    	glBindFramebuffer(GL_FRAMEBUFFER, id);
-        glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, tex.getId(), 0);
-        texture = tex;
-        bindDepthRenderBuffer(tex.getWidth(), tex.getHeight());
+    public void resize() {
+        glBindFramebuffer(GL_FRAMEBUFFER, id);
+        glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, texture.getId(), 0);
+        bindDepthRenderBuffer(texture.getWidth(), texture.getHeight());
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
-
     
     /**
-     * binds a depth render buffer to the fbo
+     * binds a depth loadRender buffer to the fbo
      * 
-     * @param w - width of the render buffer
-     * @param h - height of the render buffer
+     * @param w - width of the loadRender buffer
+     * @param h - height of the loadRender buffer
      */
     private void bindDepthRenderBuffer(int w, int h) {
         depthRenderBufferID = glGenRenderbuffers();
@@ -120,9 +116,9 @@ public class FBO extends CNGE {
     }
     
     /**
-     * gets the handle for the depth render buffer
+     * gets the handle for the depth loadRender buffer
      * 
-     * @return depth render buffer
+     * @return depth loadRender buffer
      */
     public int getDepthRenderBufferID() {
         return depthRenderBufferID;

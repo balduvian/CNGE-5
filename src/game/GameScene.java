@@ -35,9 +35,7 @@ public class GameScene extends Scene {
     @Override
     protected void sceneStart() {
         box = new Transform(10, 10, 60, 60);
-        GameAssets.lagTexture = new Texture("res/icon.png");
-        GameAssets.textureShader = new TextureShader();
-        //GameAssets.rect = new RectShape();
+        System.out.println("DAB");
     }
 
     @Override

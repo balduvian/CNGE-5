@@ -1,52 +1,54 @@
 package cnge.graphics.texture;
 
+import org.joml.Vector4f;
+
 public class TileTexture extends Texture {
 	
 	private float frameWidth;
 	private float frameHeight;
-	
+
+	private Vector4f dims;
+
+	/*
+	 * constructors
+	 */
+
 	public TileTexture(String path, int fw, int ft, TexturePreset tp) {
-		init(path, tp.clampHorz, tp.clampVert, tp.nearest);
+		super(path, tp);
 		frameWidth = 1f/fw;
 		frameHeight = 1f/ft;
 	}
-	
-	public TileTexture(String path, int fw, TexturePreset tp) {
-		init(path, tp.clampHorz, tp.clampVert, tp.nearest);
-		frameWidth = 1f/fw;
-		frameHeight = 1;
-	}
-	
+
 	public TileTexture(String path, int fw, int ft) {
-		init(path, TexturePreset.defaultClampHorz, TexturePreset.defaultClampVert, TexturePreset.defaultNearest);
+		super(path);
 		frameWidth = 1f/fw;
 		frameHeight = 1f/ft;
 	}
-	
-	public TileTexture(String path, int fw) {
-		init(path, TexturePreset.defaultClampHorz, TexturePreset.defaultClampVert, TexturePreset.defaultNearest);
+
+	public TileTexture(String path, int fw, TexturePreset tp) {
+		super(path, tp);
 		frameWidth = 1f/fw;
-		frameHeight = 1;
 	}
-	
-	public float getX() {
-		return frameWidth;
+
+	public TileTexture(String path, int fw) {
+		super(path);
+		frameWidth = 1f/fw;
 	}
-	
-	public float getY() {
-		return frameHeight;
+
+	public Vector4f getDims(int x, int y) {
+		dims.x = frameWidth;
+		dims.y = frameHeight;
+		dims.z = x*frameWidth;
+		dims.w = y*frameHeight;
+		return dims;
 	}
-	
-	public float getZ(int frame) {
-		return frame*frameWidth;
+
+	public Vector4f getDims(int x) {
+		dims.x = frameWidth;
+		dims.y = frameHeight;
+		dims.z = x*frameWidth;
+		dims.w = 0;
+		return dims;
 	}
-	
-	public float getW(int frame) {
-		return frame*frameHeight;
-	}
-	
-	public float getW() {
-		return 0;
-	}
-	
+
 }

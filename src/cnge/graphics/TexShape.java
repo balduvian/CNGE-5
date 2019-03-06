@@ -10,7 +10,7 @@ abstract public class TexShape extends Shape{
 	 * 
 	 * @param vertices - list of vertices
 	 * @param indices - the order in which the vertices are connected
-	 * @param texCoords - where on the texture to render for each vertex
+	 * @param texCoords - where on the texture to loadRender for each vertex
 	 * @param drawMode - points, lines, or triangles
 	 */
 	public TexShape(float[] vertices, int[] indices, float[] texCoords, int drawMode) {

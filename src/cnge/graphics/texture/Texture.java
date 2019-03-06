@@ -6,161 +6,144 @@ import java.nio.ByteBuffer;
 
 import javax.imageio.ImageIO;
 
+import static cnge.graphics.texture.TexturePreset.TP;
+import static cnge.graphics.texture.TexturePreset.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.GL_CLAMP_TO_BORDER;
 
+import cnge.graphics.Destroyable;
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL12;
 
-public class Texture {
+public class Texture implements Destroyable {
 	
 	private int id;
 	
 	private int width;
 	private int height;
-	
-	/**
-	 * the ultimate texture contructor, with full customizablility
-	 * 
-	 * @param tp - the texture preset
-	 * 
-	 * @return a new texture
+
+	protected class TextureInfo {
+		public int wi;
+		public int hi;
+		public ByteBuffer bb;
+
+		public TextureInfo(int w, int h, ByteBuffer b) {
+			wi = w;
+			hi = h;
+			bb = b;
+		}
+	}
+
+	/*
+	 * CONSTRUCTORS
 	 */
+	
 	public Texture(String path, TexturePreset tp) {
-		init(path, tp.clampHorz, tp.clampVert, tp.nearest);
+		TextureInfo ti = createTextureInfo(path);
+		init(ti.wi, ti.hi, ti.bb, tp.clampHorz, tp.clampVert, tp.minFilter, tp.magFilter);
+		System.gc();
 	}
-	
+
 	public Texture(String path) {
-		init(path, TexturePreset.defaultClampHorz, TexturePreset.defaultClampVert, TexturePreset.defaultNearest);
+		TextureInfo ti = createTextureInfo(path);
+		init(ti.wi, ti.hi, ti.bb, defaultClampHorz, defaultClampVert, defaultMinFilter, defaultMagFilter);
+		System.gc();
 	}
+
+	public Texture(int w, int h, ByteBuffer bb, TexturePreset tp) {
+		init(w, h, bb, tp.clampHorz, tp.clampVert, tp.minFilter, tp.magFilter);
+	}
+
+	public Texture(int w, int h, ByteBuffer bb) {
+		init(w, h, bb, defaultClampHorz, defaultClampVert, defaultMinFilter, defaultMagFilter);
+	}
+
+	public Texture(int w, int h) {
+		init(w, h, BufferUtils.createByteBuffer(w * h * 4), GL_CLAMP_TO_BORDER, GL_CLAMP_TO_BORDER, GL_NEAREST, GL_NEAREST);
+	}
+
+	public Texture() {
+		id = glGenTextures();
+	}
+
+	/*
+	 * constructor helpers
+	 */
 	
-	protected void init(String p, boolean ch, boolean cv, boolean n) {
-		BufferedImage b = null;
+	protected void init(int wi, int hi, ByteBuffer bb, int ch, int cv, int mf, int gf) {
+		id = glGenTextures();
+		width = wi;
+		height = hi;
+
+		bind();
+
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, ch);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, cv);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, mf);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, gf);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, wi, hi, 0, GL_RGBA, GL_UNSIGNED_BYTE, bb);
+
+		unbind();
+	}
+
+	protected TextureInfo createTextureInfo(String path) {
+		BufferedImage image = null;
+
 		try {
-			b = ImageIO.read(new File(p));
-		}catch(IOException ex) {
+			image = ImageIO.read(new File(path));
+		} catch(IOException ex) {
 			ex.printStackTrace();
 			System.err.println("TEXTURE NOT FOUND, resolving to placeholder");
 			try {
-				b = ImageIO.read(new File("res/cnge/missing.png"));
-			} catch (IOException ex2) {
-				ex2.printStackTrace();
-				System.err.println("SOMETHING WENT TERRIBLY, TERRIBLY WRONG");
-			}
+				image = ImageIO.read(new File("res/cnge/missing.png"));
+			} catch (IOException ex2) { ex2.printStackTrace(); System.exit(-3); }
 		}
-		width = b.getWidth();
-		height = b.getHeight();
-		int[] pixels = b.getRGB(0, 0, width, height, null, 0, width);
-		ByteBuffer buffer = BufferUtils.createByteBuffer(width*height*4);
-		for(int i = 0; i < height; ++i) {
-			for(int j = 0; j < width; ++j) {
-				int pixel = pixels[i*width+j];
+
+		int wi = image.getWidth();
+		int hi = image.getHeight();
+
+		int[] pixels = image.getRGB(0, 0, wi, hi, null, 0, wi);
+
+		ByteBuffer buffer = BufferUtils.createByteBuffer(wi * hi * 4);
+
+		for(int i = 0; i < hi; ++i) {
+			for(int j = 0; j < wi; ++j) {
+				int pixel = pixels[i * wi + j];
 				buffer.put((byte)((pixel >> 16) & 0xff));
 				buffer.put((byte)((pixel >>  8) & 0xff));
 				buffer.put((byte)((pixel      ) & 0xff));
 				buffer.put((byte)((pixel >> 24) & 0xff));
 			}
 		}
+
 		buffer.flip();
-		id = glGenTextures();
+
+		return new TextureInfo(wi, hi, buffer);
+	}
+
+	/*
+	 * stuff to do
+	 */
+
+	public void resize(int wi, int hi) {
+		width = wi;
+		height = hi;
+
+		ByteBuffer bb = BufferUtils.createByteBuffer(wi * hi * 4);
+		bb.flip();
+
 		bind();
-		if(ch) {
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
-		}
-		if(cv) {
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
-		}
-		if(n) {
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		}else {
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		}
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, wi, hi, 0, GL_RGBA, GL_UNSIGNED_BYTE, bb);
+
 		unbind();
 	}
 
-	/**
-	 * create a texture from a byte buffer
-	 * 
-	 * @param bb - the fin byte buffer
-	 */
-	public Texture(int w, int h, ByteBuffer bb) {
-		width = w;
-		height = h;
-		bb.flip();
-		id = glGenTextures();
-		bind();
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, bb);
-		unbind();
-	}
-	
-	/**
-	 * the dummest of dummy textures. Unusable but fast
-	 */
-	public Texture() {
-        id = glGenTextures();
-    }
-	
-	/**
-	 * a texture for frameBuffers
-	 * 
-	 * @param w - texture width
-	 * @param h - texture height
-	 * @param tp - texture parameters
-	 */
-	public Texture(int w, int h, TexturePreset tp) {
-        width = w;
-        height = h;
-        id = glGenTextures();
-        bind();
-        if(tp.clampHorz) {
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
-		}
-		if(tp.clampVert) {
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
-		}
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (ByteBuffer) null);
-        if(tp.nearest) {
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		}else {
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		}
-        unbind();
-    }
-	
-	/**
-	 * creates a blank texture with default texture presets
-	 * 
-	 * @param w
-	 * @param h
-	 */
-	public Texture(int w, int h) {
-        width = w;
-        height = h;
-        id = glGenTextures();
-        bind();
-        if(TexturePreset.defaultClampHorz) {
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
-		}
-		if(TexturePreset.defaultClampVert) {
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
-		}
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (ByteBuffer) null);
-        if(TexturePreset.defaultNearest) {
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		}else {
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		}
-        unbind();
-    }
-	
 	public void bind() {
 		glBindTexture(GL_TEXTURE_2D, id);
 	}
@@ -168,11 +151,7 @@ public class Texture {
 	public static void unbind() {
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	
-	public void destroy() {
-		glDeleteTextures(id);
-	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -183,6 +162,11 @@ public class Texture {
 	
 	public int getHeight() {
 		return height;
+	}
+
+	public Void destroy() {
+		glDeleteTextures(id);
+		return null;
 	}
 
 }

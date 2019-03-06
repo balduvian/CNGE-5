@@ -3,7 +3,7 @@ package cnge.graphics;
 import cnge.graphics.shapes.ArrowShape;
 import cnge.graphics.shapes.RectShape;
 
-abstract public class Shape {
+abstract public class Shape implements Destroyable {
 	
 	protected VBO vbo;
 	
@@ -21,6 +21,11 @@ abstract public class Shape {
 	
 	public void render() {
 		vbo.render();
+	}
+
+	public Void destroy() {
+		vbo.destroy();
+		return null;
 	}
 	
 }

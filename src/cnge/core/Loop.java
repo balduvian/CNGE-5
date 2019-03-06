@@ -67,7 +67,7 @@ public class Loop extends CNGE {
         beginLoop();
         while(!window.shouldClose()) {
            if(shouldDoFrame())
-               CNGE.looper.loop(update, render);
+               CNGE.updateRender.loop(update, render);
            checkSecondHasPassed();
         }
     }

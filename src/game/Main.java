@@ -1,7 +1,5 @@
 package game;
 
-import java.io.IOException;
-
 import cnge.core.*;
 import cnge.core.interfaces.LoadSubLooper;
 import cnge.core.interfaces.SubLooper;
@@ -10,71 +8,69 @@ import cnge.graphics.Shader;
 import cnge.graphics.Window;
 import cnge.graphics.shapes.RectShape;
 import cnge.graphics.texture.Texture;
-import game.shaders.TextureShader;
+import cnge.graphics.texture.TexturePreset;
+import game.shaders.ColorShader;
+
+import static org.lwjgl.opengl.GL11.GL_LINEAR;
+import static org.lwjgl.opengl.GL11.GL_REPEAT;
 
 public class Main {
 
-	BaseShader baseShader;
-	RectShape rect;
-	Scene scene;
+	/*
+	 * these ones are for the load screens so they don't have to load themselves
+	 */
+	public static ColorShader colorShader;
+	public static RectShape rect;
+
+	private BaseShader baseShader;
+	private Scene scene;
 
 	protected Main() {
+		TexturePreset.setDefaults(GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR);
+
 		CNGE.initGameSize(256, 144);
 		CNGE.initScreenMode(Screen.makeAspectScreen(), -1);
-		CNGE.initTextureDefaults(CNGE.WRAP, CNGE.WRAP, CNGE.NEAREST, CNGE.NEAREST);
 		CNGE.initWindow(new Window().initFull(false).initName("here we go").initIcon("res/icon.png").init());
-		CNGE.initLooper(this::frame, this::loopFrame);
+		CNGE.initLoopers(this::updateRender, this::loadRender);
 		CNGE.initAssetBundles(new GameAssets());
 		CNGE.initDebug(true);
 
+		colorShader = new ColorShader();
 		baseShader = new BaseShader();
 		rect = new RectShape();
 
+		//entry scene
 		scene = new GameScene();
 
-		new Loop().gameRun(scene::update, scene::render);
+		new Loop().run(scene::update, scene::render);
 	}
 
-	private void frame(SubLooper update, SubLooper render) {
-		CNGE.window.pollEvents();
-
+	private void updateRender(SubLooper update, SubLooper render) {
+		preRender();
 		update.subLoop();
-
-		CNGE.camera.update();
-
-        CNGE.gameBuffer.enable();
-        Window.clear(1, 0, 0, 1);
-
-        render.subLoop();
-
-        FBO.enableDefault();
-        Window.clear(0, 0.5f, 0.6f, 1);
-
-        CNGE.gameBuffer.getTexture().bind();
-        baseShader.enable();
-        baseShader.setMvp(CNGE.camera.ndcFullMatrix());
-        CNGE.screen.setScreenViewport();
-
-        rect.render();
-
-        Shader.disable();
-        Texture.unbind();
-
-        CNGE.window.swap();
+		midRender();
+		render.subLoop();
+		postRender();
 	}
 
-	private void loopFrame(LoadSubLooper render, int along, int total) {
+	public void loadRender(LoadSubLooper render, int along, int total) {
+		preRender();
+		midRender();
+		render.subLoop(along, total);
+		postRender();
+	}
+
+	public void preRender() {
 		CNGE.window.pollEvents();
+	}
 
-		//we don't update around these parts
-
+	public void midRender() {
 		CNGE.camera.update();
-
 		CNGE.gameBuffer.enable();
 		Window.clear(1, 0, 0, 1);
+	}
 
-		render.subLoop(along, total);
-
+	public void postRender() {
 		FBO.enableDefault();
 		Window.clear(0, 0.5f, 0.6f, 1);
 

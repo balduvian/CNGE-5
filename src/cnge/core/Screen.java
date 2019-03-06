@@ -39,7 +39,8 @@ public class Screen extends CNGE{
         //calculate frame height
         framer.reFrame(this, w, h);
         //then use it
-        gameBuffer.replaceTexture(new Texture(frameWidth, frameHeight, new TexturePreset().nearest(true)));
+        gameBuffer.getTexture().resize(frameWidth, frameHeight);
+        gameBuffer.resize();
     }
 
     public int getFrameWidth() {

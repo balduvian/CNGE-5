@@ -36,7 +36,7 @@ public class Camera extends CNGE {
 	/**
 	 * sets the projection view of the camera.
 	 * 
-	 * you need to do this after every transformation or else things won't render with the new camera transformation
+	 * you need to do this after every transformation or else things won't loadRender with the new camera transformation
 	 */
 	public void update() {
 		projection.scale(transform.wScale, transform.hScale, 1, projectionView);

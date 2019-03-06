@@ -4,6 +4,7 @@ import static org.lwjgl.opengl.GL20.glGetUniformLocation;
 import static org.lwjgl.opengl.GL20.glUniform4f;
 
 import cnge.graphics.Shader;
+import org.joml.Vector4f;
 
 public class TileShader extends Shader {
 	
@@ -17,8 +18,8 @@ public class TileShader extends Shader {
 		colorLoc = glGetUniformLocation(program, "inColor");
 	}
 	
-	public void setUniforms(float x, float y, float w, float h, float r, float g, float b, float a) {
-		glUniform4f(texLoc, x, y, w, h);
+	public void setUniforms(Vector4f dims, float r, float g, float b, float a) {
+		glUniform4f(texLoc, dims.x, dims.y, dims.z, dims.w);
 		glUniform4f(colorLoc, r, g, b, a);
 	}
 	

@@ -1,5 +1,11 @@
 package cnge.graphics.texture;
 
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL12.GL_REPEAT;
+import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
+import static org.lwjgl.opengl.GL13.GL_CLAMP_TO_BORDER;
+import static org.lwjgl.opengl.GL14.GL_MIRRORED_REPEAT;
+
 /**
  * this is used to pass in parameters into a texture in a modular way, where you only need to give what's different than the default option
  * 
@@ -8,55 +14,133 @@ package cnge.graphics.texture;
  * @author Emmet
  */
 public class TexturePreset {
-	
-	public static boolean defaultClampHorz;
-	public static boolean defaultClampVert;
-	public static boolean defaultNearest;
-	
-	public boolean clampHorz;
-	public boolean clampVert;
-	public boolean nearest;
-	
-	//TODO big and skeker
-	
-	/**
-	 * use this to set the default parameters for textures
-	 * 
-	 * @param fw - the default frames wide
-	 * @param ft - the default frames tall
-	 * @param ch - the default clamp horizontal
-	 * @param cv - the default clamp vertical
-	 * @param nr - the default nearest neighbor interpolation
-	 */
-	public static void setDefaults(boolean ch, boolean cv, boolean nr) {
-		defaultClampHorz = ch;
-		defaultClampVert = cv;
-		defaultNearest = nr;
+
+	public static int defaultClampHorz;
+	public static int defaultClampVert;
+	public static int defaultMinFilter;
+	public static int defaultMagFilter;
+
+	public int clampHorz;
+	public int clampVert;
+	public int minFilter;
+	public int magFilter;
+
+	public static void setDefaults(int dch, int dcv, int dmf, int dgf) {
+		defaultClampHorz = dch;
+		defaultClampVert = dcv;
+		defaultMinFilter = dmf;
+		defaultMagFilter = dgf;
 	}
-	
-	/**
-	 * constructs a new texture preset, automatically set with default values
-	 * 
-	 * now add the setting methods after this to set parameters that are other than default
-	 */
-	public TexturePreset() {
+
+	private TexturePreset() {
 		clampHorz = defaultClampHorz;
 		clampVert = defaultClampVert;
-		nearest = defaultNearest;
+		minFilter = defaultMinFilter;
+		minFilter = defaultMagFilter;
 	}
-	
-	public TexturePreset clampHorz(boolean ch) {
-		clampHorz = ch;
+
+	public static TexturePreset TP(){
+		return new TexturePreset();
+	}
+
+	/*
+	 * setters
+	 */
+
+	public TexturePreset ch_Repeat() {
+		clampHorz = GL_REPEAT;
 		return this;
 	}
-	
-	public TexturePreset clampVert(boolean cv) {
-		clampVert = cv;
+
+	public TexturePreset ch_Mirrored() {
+		clampHorz = GL_MIRRORED_REPEAT;
 		return this;
 	}
-	
-	public TexturePreset nearest(boolean nr) {
-		nearest = nr;
+
+	public TexturePreset ch_Edge() {
+		clampHorz = GL_CLAMP_TO_EDGE;
 		return this;
 	}
+
+	public TexturePreset ch_Border() {
+		clampHorz = GL_CLAMP_TO_BORDER;
+		return this;
+	}
+
+	public TexturePreset cv_Repeat() {
+		clampVert = GL_REPEAT;
+		return this;
+	}
+
+	public TexturePreset cv_Mirrored() {
+		clampVert = GL_MIRRORED_REPEAT;
+		return this;
+	}
+
+	public TexturePreset cv_Edge() {
+		clampVert = GL_CLAMP_TO_EDGE;
+		return this;
+	}
+
+	public TexturePreset cv_Border() {
+		clampVert = GL_CLAMP_TO_BORDER;
+		return this;
+	}
+
+	public TexturePreset min_nearest() {
+		minFilter = GL_NEAREST;
+		return this;
+	}
+
+	public TexturePreset min_linear() {
+		minFilter = GL_LINEAR;
+		return this;
+	}
+
+	public TexturePreset mag_nearest() {
+		magFilter = GL_NEAREST;
+		return this;
+	}
+
+	public TexturePreset mag_linear() {
+		magFilter = GL_LINEAR;
+		return this;
+	}
+
+	public TexturePreset repeat() {
+		clampHorz = GL_REPEAT;
+		clampVert = GL_REPEAT;
+		return this;
+	}
+
+	public TexturePreset mirrored() {
+		clampHorz = GL_MIRRORED_REPEAT;
+		clampVert = GL_MIRRORED_REPEAT;
+		return this;
+	}
+
+	public TexturePreset edge() {
+		clampHorz = GL_CLAMP_TO_EDGE;
+		clampVert = GL_CLAMP_TO_EDGE;
+		return this;
+	}
+
+	public TexturePreset border() {
+		clampHorz = GL_CLAMP_TO_BORDER;
+		clampVert = GL_CLAMP_TO_BORDER;
+		return this;
+	}
+
+	public TexturePreset nearest() {
+		minFilter = GL_NEAREST;
+		magFilter = GL_NEAREST;
+		return this;
+	}
+
+	public TexturePreset linear() {
+		minFilter = GL_LINEAR;
+		minFilter = GL_LINEAR;
+		return this;
+	}
+
 }

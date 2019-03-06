@@ -12,10 +12,12 @@ public class GameLoadScreen extends LoadScreen {
 
     private static ColorShader colorShader;
     private static RectShape rect;
+    private static Camera camera;
 
     public GameLoadScreen() {
-        colorShader = new ColorShader();
-        rect = new RectShape();
+        colorShader = Main.colorShader;
+        rect = Main.rect;
+        camera = CNGE.camera;
     }
 
     //TOP LEFT
@@ -36,7 +38,7 @@ public class GameLoadScreen extends LoadScreen {
 
     @Override
     protected void loadRender(int along, int total) {
-        Camera cam = CNGE.camera;
+        CNGE.window.pollEvents();
 
         Window.clear(0, 0, 0, 1);
 
@@ -44,19 +46,19 @@ public class GameLoadScreen extends LoadScreen {
 
         colorShader.setUniforms(1, 1, 1, 1);
 
-        colorShader.setMvp(cam.getMVP(cam.getMBounds(60, 64, 50, 94)));
+        colorShader.setMvp(camera.getMVP(camera.getMBounds(60, 64, 50, 94)));
         rect.render();
 
-        colorShader.setMvp(cam.getMVP(cam.getMBounds(60, 196, 50, 54)));
+        colorShader.setMvp(camera.getMVP(camera.getMBounds(60, 196, 50, 54)));
         rect.render();
 
-        colorShader.setMvp(cam.getMVP(cam.getMBounds(60, 196, 90, 94)));
+        colorShader.setMvp(camera.getMVP(camera.getMBounds(60, 196, 90, 94)));
         rect.render();
 
-        colorShader.setMvp(cam.getMVP(cam.getMBounds(192, 196, 50, 94)));
+        colorShader.setMvp(camera.getMVP(camera.getMBounds(192, 196, 50, 94)));
         rect.render();
 
-        colorShader.setMvp(cam.getMVP(cam.getMBounds(64, 64 + (128 * ((float)along / total)), 54, 90)));
+        colorShader.setMvp(camera.getMVP(camera.getMBounds(64, 64 + (128 * ((float)along / total)), 54, 90)));
         rect.render();
 
         Shader.disable();
