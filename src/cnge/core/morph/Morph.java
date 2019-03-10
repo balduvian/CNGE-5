@@ -47,7 +47,7 @@ public class Morph {
 	 * the interpolators
 	 */
 	
-	public static final Interpolator lINEAR = new Interpolator() {
+	public static final Interpolator LINEAR = new Interpolator() {
 		public float interpolate(float start, float end, float along) {
 			return betweenValues(start, end, along);
 		}
