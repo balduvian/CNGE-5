@@ -135,10 +135,10 @@ abstract public class Font {
 	}
 	
 	/**
-	 * returns the number at the end of the line the fileInputStream is on
+	 * returns the number at the endTimer of the line the fileInputStream is on
 	 * 
 	 * @param is - input stream
-	 * @return the number at the end of this line
+	 * @return the number at the endTimer of this line
 	 */
 	private int intLine(FileInputStream is) {
 		return intFromChars(collectLine(is));

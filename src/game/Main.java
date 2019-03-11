@@ -3,10 +3,10 @@ package game;
 import cnge.core.*;
 import cnge.core.interfaces.LoadSubLooper;
 import cnge.core.interfaces.SubLooper;
-import cnge.graphics.FBO;
+import cnge.graphics.FrameBuffer;
 import cnge.graphics.Shader;
 import cnge.graphics.Window;
-import cnge.graphics.shapes.RectShape;
+import cnge.graphics.shape.RectShape;
 import cnge.graphics.texture.Texture;
 import cnge.graphics.texture.TexturePreset;
 import game.shaders.ColorShader;
@@ -40,13 +40,12 @@ public class Main {
 		rect = new RectShape();
 
 		//entry scene
-		scene = new GameScene();
+		scene = CNGE.scene = new GameScene();
 
 		new Loop().run(scene::update, scene::render);
 	}
 
 	private void updateRender(SubLooper update, SubLooper render) {
-		preRender();
 		update.subLoop();
 		midRender();
 		render.subLoop();
@@ -54,27 +53,23 @@ public class Main {
 	}
 
 	public void loadRender(LoadSubLooper render, int along, int total) {
-		preRender();
+		CNGE.window.pollEvents();
 		midRender();
 		render.subLoop(along, total);
 		postRender();
-	}
-
-	public void preRender() {
-		CNGE.window.pollEvents();
+		CNGE.window.swap();
 	}
 
 	public void midRender() {
 		CNGE.camera.update();
-		CNGE.gameBuffer.enable();
+		CNGE.gameBuffer.enableTexture();
 		Window.clear(1, 0, 0, 1);
 	}
 
 	public void postRender() {
-		FBO.enableDefault();
-		Window.clear(0, 0.5f, 0.6f, 1);
+		FrameBuffer.enableDefault();
+		Window.clear(0, 0f, 0f, 1);
 
-		CNGE.gameBuffer.getTexture().bind();
 		baseShader.enable();
 		baseShader.setMvp(CNGE.camera.ndcFullMatrix());
 		CNGE.screen.setScreenViewport();
@@ -83,8 +78,6 @@ public class Main {
 
 		Shader.disable();
 		Texture.unbind();
-
-		CNGE.window.swap();
 	}
 
 }

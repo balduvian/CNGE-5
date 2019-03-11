@@ -12,7 +12,7 @@ import static org.lwjgl.opengl.GL11.glBlendFunc;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glViewport;
-import static org.lwjgl.opengl.GL11C.glClearColor;
+import static org.lwjgl.opengl.GL11C.*;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -63,6 +63,8 @@ public class Window extends CNGE {
 	private long window;
 	private GLFWVidMode vidMode;
 	private long monitor;
+
+	private boolean resizing;
 
 	//region inits
 
@@ -142,7 +144,7 @@ public class Window extends CNGE {
 			(long window, int ww, int hh) -> {
 				width = ww;
 				height = hh;
-				screen.reFrame(width, height);
+				resizing = true;
 			}
 		);
 
@@ -156,7 +158,17 @@ public class Window extends CNGE {
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+		resizing = false;
+
 		return this;
+	}
+
+	public boolean getResizing() {
+		return resizing;
+	}
+
+	public void resetResizing() {
+		resizing = false;
 	}
 
 	public void threadUnContextualize() {

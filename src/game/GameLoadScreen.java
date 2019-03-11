@@ -5,7 +5,7 @@ import cnge.core.LoadScreen;
 import cnge.graphics.Camera;
 import cnge.graphics.Shader;
 import cnge.graphics.Window;
-import cnge.graphics.shapes.RectShape;
+import cnge.graphics.shape.RectShape;
 import game.shaders.ColorShader;
 
 public class GameLoadScreen extends LoadScreen {

@@ -1,4 +1,4 @@
-package cnge.graphics;
+package cnge.graphics.shape;
 
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
 import static org.lwjgl.opengl.GL11.GL_UNSIGNED_INT;
@@ -17,17 +17,17 @@ import static org.lwjgl.opengl.GL30.glBindVertexArray;
 import static org.lwjgl.opengl.GL30.glDeleteVertexArrays;
 import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 
-public class VBO {
+public class VAO {
 	
 	private int mode;
 	private int numAttribs;
 	private int ibo;
 	private int vao;
+	private int nor;
 	private int count;
 	private int[] attribs;
 	
-	public VBO(int num, float[] vertices, int[] indices, int drawMode) {
-		
+	public VAO(int num, float[] vertices, int[] indices, int drawMode) {
 		attribs = new int[num];
 		numAttribs = 0;
 		
@@ -38,7 +38,7 @@ public class VBO {
 		ibo = glGenBuffers();
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices, GL_STATIC_DRAW);
-		
+
 		count = indices.length;
 		
 		mode = drawMode;

@@ -8,7 +8,7 @@ import static org.lwjgl.opengl.GL11.glClearColor;
 import cnge.core.Block;
 import cnge.core.BlockSet;
 import cnge.core.Entity;
-import cnge.graphics.FBO;
+import cnge.graphics.FrameBuffer;
 import cnge.graphics.Transform;
 import cnge.graphics.texture.Texture;
 
@@ -34,12 +34,12 @@ abstract public class Map<B extends Block> extends Entity {
 	
 	protected int scale;
 	
-	private FBO mapBuffer;
+	private FrameBuffer mapBuffer;
 	
 	public Map(Access a, int s) {
 		access = a;
 		scale = s;
-		mapBuffer = new FBO();
+		mapBuffer = new FrameBuffer(new Texture(), false);
 		getOnScreenDims();
 	}
 	
@@ -84,8 +84,7 @@ abstract public class Map<B extends Block> extends Entity {
 		Transform t = camera.getTransform();
 		acr = (int)Math.ceil(t.getWidth() / scale) + 1;
 		dow = (int)Math.ceil(t.getHeight() / scale) + 1;
-		mapBuffer.getTexture().resize(acr * scale, dow * scale);
-		mapBuffer.resize();
+		mapBuffer.resize(acr * scale, dow * scale);
 	}
 	
 	/**
@@ -194,7 +193,7 @@ abstract public class Map<B extends Block> extends Entity {
 		return (int)((y-transform.y) * height / transform.height);
 	}
 	
-	public FBO getMapBuffer() {
+	public FrameBuffer getMapBuffer() {
 		return mapBuffer;
 	}
 	
@@ -334,7 +333,7 @@ abstract public class Map<B extends Block> extends Entity {
 	
 	public void render(int layer) {
 		
-		mapBuffer.enable();
+		mapBuffer.enableTexture();
 		camera.setDims(acr * scale, dow * scale);
 		
 		//clear the buffer

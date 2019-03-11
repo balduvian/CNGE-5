@@ -1,9 +1,9 @@
 package cnge.core.morph;
 
-import cnge.core.Loop;
+import cnge.core.timer.Timer;
 import cnge.graphics.Transform;
 
-public class Morph {
+public class TMorph {
 	
 	/*
 	 * the morphers
@@ -85,9 +85,6 @@ public class Morph {
 	
 	private Transform modify;
 	
-	private double timer;
-	private double time;
-	
 	private float xPos;
 	private float yPos;
 	private float rotation;
@@ -107,16 +104,17 @@ public class Morph {
 	private Morpher scalorY;
 	
 	private Interpolator interpolator;
-	
+
+	private Timer timer;
+
 	public static float betweenValues(float start, float end, float interpolated) {
 		return ((end - start) * interpolated + start);
 	}
 	
-	public Morph(Transform start, Interpolator i, double t) {
-		timer = 0;
-		time = t;
+	public TMorph(Timer r, Transform t, Interpolator i) {
+		timer = r;
 		
-		modify = start;
+		modify = t;
 		interpolator = i;
 		
 		oXPos = modify.x;
@@ -137,31 +135,31 @@ public class Morph {
 		scalorY = doNothing;
 	}
 	
-	public Morph addPositionX(float x) {
+	public TMorph addPositionX(float x) {
 		xPos = x;
 		translatorX = doTransX;
 		return this;
 	}
 	
-	public Morph addPositionY(float y) {
+	public TMorph addPositionY(float y) {
 		yPos = y;
 		translatorY = doTransY;
 		return this;
 	}
 	
-	public Morph addRotation(float r) {
+	public TMorph addRotation(float r) {
 		oRotation = r;
 		rotator = doRotate;
 		return this;
 	}
 	
-	public Morph addScaleW(float w) {
+	public TMorph addScaleW(float w) {
 		wScale = w;
 		scalorX = doScaleX;
 		return this;
 	}
 	
-	public Morph addScaleH(float h) {
+	public TMorph addScaleH(float h) {
 		hScale = h;
 		scalorY = doScaleY;
 		return this;
@@ -171,24 +169,21 @@ public class Morph {
 	 * @return TRUE if it's done
 	 */
 	public boolean update() {
-		timer += Loop.time;
+		boolean finished = timer.update();
 		
-		if(timer > time) {
-			timer = time;
-		}
-		
-		float along = (float)(timer / time);
+		float along = timer.getAlong();
+
 		translatorX.morph(modify, interpolator, oXPos, xPos, along);
 		translatorY.morph(modify, interpolator, oYPos, yPos, along);
 		rotator.morph(modify, interpolator, oRotation, rotation, along);
 		scalorX.morph(modify, interpolator, oWScale, wScale, along);
 		scalorY.morph(modify, interpolator, oHScale, hScale, along);
 			
-		return (timer == time);
+		return finished;
 	}
 
 	public void reset() {
-		timer = 0;
+		timer.reset();
 		oXPos = modify.x;
 		oYPos = modify.y;
 		oRotation = modify.rotation;
@@ -196,8 +191,8 @@ public class Morph {
 		oHScale = modify.hScale;
 	}
 	
-	public void setTime(double t) {
-		time = t;
+	public Timer timer() {
+		return timer;
 	}
 	
 	private interface Morpher {

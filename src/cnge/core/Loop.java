@@ -26,6 +26,8 @@ public class Loop extends CNGE {
     private int frames;
     private long now;
 
+    private boolean lastResizing;
+
     private interface VoidCall {
         void call();
     }
@@ -40,6 +42,7 @@ public class Loop extends CNGE {
         lastSec = last;
         frames = 0;
         now = 0;
+        lastResizing = true;
     }
 
     private boolean shouldDoFrame() {
@@ -66,8 +69,19 @@ public class Loop extends CNGE {
     public void run(SubLooper update, SubLooper render) {
         beginLoop();
         while(!window.shouldClose()) {
-           if(shouldDoFrame())
-               CNGE.updateRender.loop(update, render);
+           if(shouldDoFrame()) {
+               window.pollEvents();
+               if(!window.getResizing()) {
+                   if(lastResizing) {
+                       screen.reFrame(window.getWidth(), window.getHeight());
+                       scene.windowReszied(screen.getFrameWidth(), screen.getFrameHeight());
+                   }
+                   CNGE.updateRender.loop(update, render);
+               }
+               lastResizing = window.getResizing();
+               window.resetResizing();
+               window.swap();
+           }
            checkSecondHasPassed();
         }
     }

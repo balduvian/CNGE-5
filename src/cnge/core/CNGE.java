@@ -3,10 +3,9 @@ package cnge.core;
 import cnge.core.interfaces.*;
 import cnge.graphics.ALManagement;
 import cnge.graphics.Camera;
-import cnge.graphics.FBO;
+import cnge.graphics.FrameBuffer;
 import cnge.graphics.Window;
 import cnge.graphics.texture.Texture;
-import cnge.graphics.texture.TexturePreset;
 
 public class CNGE {
 
@@ -24,11 +23,12 @@ public class CNGE {
 
     public static Window window;
     public static Camera camera;
-    public static FBO gameBuffer;
+    public static FrameBuffer gameBuffer;
     public static Framer framer;
     public static Screen screen;
     public static ALManagement audio;
     public static AssetBundle[] assetBundles;
+    public static Scene scene;
 
     public static Looper updateRender;
     public static LoadLooper loadRender;
@@ -65,7 +65,7 @@ public class CNGE {
     public static void initWindow(Window w) {
         window = w;
         camera = new Camera(gameWidth, gameHeight);
-        gameBuffer = new FBO(new Texture());
+        gameBuffer = new FrameBuffer(new Texture(), false);
         audio = new ALManagement();
         screen.reFrame(window.getWidth(), window.getHeight());
     }

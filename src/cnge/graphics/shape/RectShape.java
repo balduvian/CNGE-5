@@ -1,13 +1,11 @@
-package cnge.graphics.shapes;
+package cnge.graphics.shape;
 
 import org.lwjgl.opengl.GL11;
-
-import cnge.graphics.TexShape;
 
 public class RectShape extends TexShape{
 
 	public RectShape() {
-		super(
+		initTex(
 			new float[] {
 			   1, 0, 0,
 			   1, 1, 0,
@@ -21,8 +19,7 @@ public class RectShape extends TexShape{
 				1, 1,
 				0, 1,
 				0, 0
-			},
-			GL11.GL_TRIANGLES
+			}
 		);
 	}
 	

@@ -9,17 +9,23 @@ import javax.imageio.ImageIO;
 import static cnge.graphics.texture.TexturePreset.TP;
 import static cnge.graphics.texture.TexturePreset.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 import static org.lwjgl.opengl.GL13.GL_CLAMP_TO_BORDER;
+import static org.lwjgl.opengl.GL32.GL_TEXTURE_2D_MULTISAMPLE;
+import static org.lwjgl.opengl.GL32.glTexImage2DMultisample;
 
 import cnge.graphics.Destroyable;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
 
 public class Texture implements Destroyable {
 	
-	private int id;
-	
-	private int width;
-	private int height;
+	protected int id;
+
+	protected int width;
+	protected int height;
+
+	protected TexturePreset preset;
 
 	protected class TextureInfo {
 		public int wi;
@@ -39,51 +45,53 @@ public class Texture implements Destroyable {
 	
 	public Texture(String path, TexturePreset tp) {
 		TextureInfo ti = createTextureInfo(path);
-		init(ti.wi, ti.hi, ti.bb, tp.clampHorz, tp.clampVert, tp.minFilter, tp.magFilter);
+		init(ti.wi, ti.hi, ti.bb, tp);
 		System.gc();
 	}
 
 	public Texture(String path) {
 		TextureInfo ti = createTextureInfo(path);
-		init(ti.wi, ti.hi, ti.bb, defaultClampHorz, defaultClampVert, defaultMinFilter, defaultMagFilter);
+		init(ti.wi, ti.hi, ti.bb, TP());
 		System.gc();
 	}
 
-	public Texture(int w, int h, ByteBuffer bb, TexturePreset tp) {
-		init(w, h, bb, tp.clampHorz, tp.clampVert, tp.minFilter, tp.magFilter);
-	}
-
-	public Texture(int w, int h, ByteBuffer bb) {
-		init(w, h, bb, defaultClampHorz, defaultClampVert, defaultMinFilter, defaultMagFilter);
+	public Texture(int w, int h, TexturePreset tp) {
+		init(w, h, BufferUtils.createByteBuffer(w * h * 4).flip(), tp);
 	}
 
 	public Texture(int w, int h) {
-		init(w, h, BufferUtils.createByteBuffer(w * h * 4), GL_CLAMP_TO_BORDER, GL_CLAMP_TO_BORDER, GL_NEAREST, GL_NEAREST);
+		init(w, h, BufferUtils.createByteBuffer(w * h * 4).flip(), TP());
 	}
 
 	public Texture() {
 		id = glGenTextures();
+		preset = TP();
 	}
 
 	/*
 	 * constructor helpers
 	 */
 	
-	protected void init(int wi, int hi, ByteBuffer bb, int ch, int cv, int mf, int gf) {
+	protected void init(int wi, int hi, ByteBuffer bb, TexturePreset tp) {
 		id = glGenTextures();
+		preset = tp;
 		width = wi;
 		height = hi;
 
 		bind();
 
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, ch);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, cv);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, mf);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, gf);
+		parameters();
 
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, wi, hi, 0, GL_RGBA, GL_UNSIGNED_BYTE, bb);
 
 		unbind();
+	}
+
+	protected void parameters() {
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, preset.clampHorz);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, preset.clampVert);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, preset.minFilter);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, preset.magFilter);
 	}
 
 	protected TextureInfo createTextureInfo(String path) {
@@ -134,10 +142,7 @@ public class Texture implements Destroyable {
 
 		bind();
 
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		parameters();
 
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, wi, hi, 0, GL_RGBA, GL_UNSIGNED_BYTE, bb);
 
@@ -162,6 +167,10 @@ public class Texture implements Destroyable {
 	
 	public int getHeight() {
 		return height;
+	}
+
+	public TexturePreset getPreset() {
+		return preset;
 	}
 
 	public Void destroy() {

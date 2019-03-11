@@ -3,39 +3,39 @@ package game;
 import cnge.core.AssetBundle;
 import cnge.core.CNGE;
 import cnge.core.Scene;
-import cnge.graphics.Shader;
+import cnge.graphics.FrameBuffer;
 import cnge.graphics.Transform;
-import cnge.graphics.Window;
-import cnge.graphics.shapes.RectShape;
+import cnge.graphics.texture.MultisampleTexture;
 import cnge.graphics.texture.Texture;
-import game.shaders.TextureShader;
 
 public class GameScene extends Scene {
 
     private Transform box;
+    private Transform box2;
+
+    private Transform planetT;
+    private FrameBuffer planetBuffer;
 
     public GameScene() {
-        super(new GameLoadScreen(), 10, GameAssets.class);
+        super(new GameLoadScreen(), 1, GameAssets.class);
     }
 
     @Override
-    protected void sceneLoad() {
-        AssetBundle.doLoad();
-        AssetBundle.doLoad();
-        AssetBundle.doLoad();
-        AssetBundle.doLoad();
-        AssetBundle.doLoad();
-        AssetBundle.doLoad();
-        AssetBundle.doLoad();
-        AssetBundle.doLoad();
-        AssetBundle.doLoad();
-        AssetBundle.doLoad();
+    public void sceneLoad() {
+        AssetBundle.doLoad(planetBuffer = new FrameBuffer(new MultisampleTexture(1, 1, 4), false));
     }
 
     @Override
-    protected void sceneStart() {
+    public void sceneStart() {
         box = new Transform(10, 10, 60, 60);
+        box2 = new Transform(20, 10, 60, 60);
         System.out.println("DAB");
+    }
+
+    @Override
+    public void windowReszied(int w, int h) {
+        planetT = new Transform(0, 0, h, h);
+        planetBuffer.resize(w, h);
     }
 
     @Override
@@ -46,19 +46,22 @@ public class GameScene extends Scene {
     @Override
     public void render() {
 
-        Window.clear(1, 0, 0.5f, 1);
+        window.clear(1f, 1f, 1f, 1f);
 
-        GameAssets.lagTexture.bind();
+        planetBuffer.enableTextureMultisample();
 
-        GameAssets.textureShader.enable();
-        GameAssets.textureShader.setMvp(CNGE.camera.getMVP(CNGE.camera.getM(box)));
+        window.clear(0, 0f, 0f, 1f);
 
-        GameAssets.rect.render();
+       // GameAssets.lagTexture.bind();
 
-        Shader.disable();
+        GameAssets.circleShader.enable();
+        GameAssets.circleShader.setUniforms(1f, 0f, 0f, 1f);
+        GameAssets.circleShader.setMvp(CNGE.camera.getMVP(CNGE.camera.getM(box)));
+        //GameAssets.circleShader.setMvp(CNGE.camera.ndcFullMatrix());
 
-        Texture.unbind();
+        GameAssets.circle.render();
 
+        planetBuffer.resolve(CNGE.gameBuffer);
     }
 
 }

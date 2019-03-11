@@ -140,9 +140,11 @@ public abstract class Scene extends CNGE {
 	/**
 	 * will be called before the scene starts, does loads that will still have the load screen on
 	 */
-	abstract protected void sceneLoad();
+	abstract public void sceneLoad();
 
-	abstract protected void sceneStart();
+	abstract public void sceneStart();
+
+	abstract public void windowReszied(int w, int h);
 
 	abstract public void render();
 	
