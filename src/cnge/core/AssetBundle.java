@@ -1,42 +1,44 @@
 package cnge.core;
 
-abstract public class AssetBundle extends CNGE {
+abstract public class AssetBundle<SCENE extends Scene> extends CNGE {
 
-	private static int along;
-	private static int total;
-	private static LoadScreen loadScreen;
+	protected static Scene.LoadStruct loadStruct;
 
+	private boolean loaded;
 	protected int subTotal;
 
-	/**
-	 * sets up a load session, with the loadscreen to use, and the total number of assets for this session,
-	 * also resets the along variable
-	 *
-	 * @param l - loadscreen
-	 * @param t - total
-	 */
-	public static void setup(LoadScreen l, int t) {
-		loadScreen = l;
-		total = t;
-		along = 0;
+	public static void setup(Scene.LoadStruct ls) {
+		loadStruct = ls;
 	}
 
-	/**
-	 * makes a new type of assetbundle, call this in a super for extention bundles
-	 *
-	 * @param st - the total number of assets to load in this bundle
-	 */
 	public AssetBundle(int st) {
 		subTotal = st;
+		loaded = false;
 	}
 
 	public int getTotal() {
 		return subTotal;
 	}
 
-	abstract public void loadRoutine();
+	/**
+	 * call scene calls this to load, no need to call the routine, as this will call it
+	 */
+	public void load(SCENE scene) {
+		loadRoutine(scene);
+		loaded = true;
+	}
 
-	abstract public void unLoadRoutine();
+	/**
+	 * the scene calls this to unload, no need to call the routine, as this will call it
+	 */
+	public void unload(SCENE scene) {
+		unloadRoutine(scene);
+		loaded = false;
+	}
+
+	abstract protected void loadRoutine(SCENE scene);
+
+	abstract protected void unloadRoutine(SCENE scene);
 
 	/**
 	 * this method consolidates loading an object, and calling the loadscreen to loadRender
@@ -44,7 +46,15 @@ abstract public class AssetBundle extends CNGE {
 	 */
 	@SuppressWarnings("unused")
 	public static void doLoad(Object... asset) {
-		loadRender.loadLoop(loadScreen::loadRender, ++along, total);
+		loadRender.loadLoop(loadStruct.loadScreen::loadRender, ++loadStruct.along, loadStruct.total);
+	}
+
+	/**
+	 * the scene schecks this to make sure it doesn't have to reload the asset bundle
+	 * @return whether this asset bundle is loaded or not
+	 */
+	public boolean isLoaded() {
+		return loaded;
 	}
 
 }

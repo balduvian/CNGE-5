@@ -7,7 +7,7 @@ import static org.lwjgl.opengl.GL13.GL_CLAMP_TO_BORDER;
 import static org.lwjgl.opengl.GL14.GL_MIRRORED_REPEAT;
 
 /**
- * this is used to pass in parameters into a texture in a modular way, where you only need to give what's different than the default option
+ * this is used to pass in parameters into vao texture in vao modular way, where you only need to give what's different than the default option
  * 
  * make you set the defaults to this class in main or per scene
  * 

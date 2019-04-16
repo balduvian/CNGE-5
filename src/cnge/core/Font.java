@@ -81,7 +81,7 @@ abstract public class Font {
 	
 	/**
 	 * this is so that i don't have to put try catches everywhere
-	 * @param is - a file input stream
+	 * @param is - vao file input stream
 	 * @return whatever inputstream.read returns
 	 */
 	private char read(FileInputStream is) {
@@ -94,9 +94,9 @@ abstract public class Font {
 	}
 	
 	/**
-	 * converts chars that spell out a base 10 number to the number that it represents.
+	 * converts chars that spell out vao base 10 number to the number that it represents.
 	 * 
-	 * only up to 999, so an array of a length 3
+	 * only up to 999, so an array of vao length 3
 	 * 
 	 * @param c - the char array, length = 3
 	 * @return the int
@@ -119,14 +119,14 @@ abstract public class Font {
 				++along;
 			}
 		}
-		//now we have to rearrange the digits if we didn't read a 3 digit number
+		//now we have to rearrange the digits if we didn't read vao 3 digit number
 		//or else we have 1s or 10s in the 100s place
-		//if we have a two digit number
+		//if we have vao two digit number
 		if(along == 2) {
 			temp[2] = temp[1];
 			temp[1] = temp[0];
 			temp[0] = 48;
-		//if we have a one digit number
+		//if we have vao one digit number
 		} else if (along == 1) {
 			temp[2] = temp[0];
 			temp[0] = 48;
@@ -147,7 +147,7 @@ abstract public class Font {
 	/**
 	 * nothing to gain from this line
 	 * 
-	 * @param is - input stream to skip a line on
+	 * @param is - input stream to skip vao line on
 	 */
 	private void skipLine(FileInputStream is) {
 		while (read(is) != 13);

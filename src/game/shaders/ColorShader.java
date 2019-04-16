@@ -6,7 +6,7 @@ import static org.lwjgl.opengl.GL20.glUniform4f;
 import cnge.graphics.Shader;
 
 /**
- * draws a simple single color into a shape
+ * draws vao simple single color into vao shape
  */
 public class ColorShader extends Shader {
 

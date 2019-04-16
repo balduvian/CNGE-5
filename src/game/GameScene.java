@@ -8,21 +8,19 @@ import cnge.graphics.Transform;
 import cnge.graphics.texture.MultisampleTexture;
 import cnge.graphics.texture.Texture;
 
+import static cnge.graphics.texture.TexturePreset.TP;
+import static org.lwjgl.opengl.GL11.GL_LINEAR;
+
 public class GameScene extends Scene {
 
     private Transform box;
     private Transform box2;
 
     private Transform planetT;
-    private FrameBuffer planetBuffer;
+    public FrameBuffer planetBuffer;
 
-    public GameScene() {
-        super(new GameLoadScreen(), 1, GameAssets.class);
-    }
-
-    @Override
-    public void sceneLoad() {
-        AssetBundle.doLoad(planetBuffer = new FrameBuffer(new MultisampleTexture(1, 1, 4), false));
+    public GameScene(Class<AssetBundle>... unloads) {
+        super(unloads, GameLoadScreen.class, GameAssets.class, SharedAssets.class);
     }
 
     @Override
@@ -34,8 +32,7 @@ public class GameScene extends Scene {
 
     @Override
     public void windowReszied(int w, int h) {
-        planetT = new Transform(0, 0, h, h);
-        planetBuffer.resize(w, h);
+        planetBuffer.resize(w * 2, h * 2);
     }
 
     @Override
@@ -48,7 +45,7 @@ public class GameScene extends Scene {
 
         window.clear(1f, 1f, 1f, 1f);
 
-        planetBuffer.enableTextureMultisample();
+        planetBuffer.enableTexture();
 
         window.clear(0, 0f, 0f, 1f);
 
@@ -59,9 +56,18 @@ public class GameScene extends Scene {
         GameAssets.circleShader.setMvp(CNGE.camera.getMVP(CNGE.camera.getM(box)));
         //GameAssets.circleShader.setMvp(CNGE.camera.ndcFullMatrix());
 
-        GameAssets.circle.render();
+        GameAssets.rect.render();
 
-        planetBuffer.resolve(CNGE.gameBuffer);
+        //
+
+        CNGE.gameBuffer.enable();
+
+        GameAssets.textureShader.enable();
+        GameAssets.textureShader.setMvp(CNGE.camera.ndcFullMatrix());
+
+        GameAssets.rect.render();
+
+       // planetBuffer.resolve(CNGE.gameBuffer);
     }
 
 }

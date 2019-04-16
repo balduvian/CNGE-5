@@ -20,7 +20,7 @@ void main(){
 	int middleX = int(x);
 	int middleY = int(y);
 	
-	//now we go in a full 9 3x3 grid around the current square lookin for more dots
+	//now we go in vao full 9 3x3 grid around the current square lookin for more dots
 	//i offset goes from -1 to 1
 	
 	float ret = 0;

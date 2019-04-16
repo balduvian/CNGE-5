@@ -2,23 +2,23 @@ package cnge.graphics;
 import cnge.core.CNGE;
 import org.joml.Matrix4f;
 
-public class Camera extends CNGE {
-	
-	private Transform transform;
-	
+public class Camera3D extends CNGE {
+
+	private Transform3D transform;
+
 	private Matrix4f projection, projectionView;
 
-	public Camera(float w, float h) {
-		transform = new Transform();
+	public Camera3D(float w, float h, float d) {
+		transform = new Transform3D();
 		projectionView = new Matrix4f();
-		setDims(w, h);
+		setDims(w, h, d);
 	}
 	
 	/**
 	 * sets virtual space back to the dimensions of the game
 	 */
 	public void defaultDims() {
-		setDims(gameWidth, gameHeight);
+		setDims(gameWidth, gameHeight, gameDepth);
 	}
 	
 	/**
@@ -27,9 +27,9 @@ public class Camera extends CNGE {
 	 * @param w - virtual width
 	 * @param h - virtual height
 	 */
-	public void setDims(float w, float h) {
-		transform.setSize(w, h);
-		projection = new Matrix4f().setOrtho(0, w, h, 0, 1, -1);
+	public void setDims(float w, float h, float d) {
+		transform.setSize(w, h, d);
+		projection = new Matrix4f().setPerspective(5f / 18f, w / h, 1, -d);
 		update();
 	}
 	
@@ -39,9 +39,11 @@ public class Camera extends CNGE {
 	 * you need to do this after every transformation or else things won't loadRender with the new camera transformation
 	 */
 	public void update() {
-		projection.scale(transform.wScale, transform.hScale, 1, projectionView);
-		projection.rotateZ(-transform.rotation, projectionView);
-		projection.translate(-transform.x, -transform.y, 0, projectionView);
+		projection.scale(transform.wScale, transform.hScale, transform.dScale, projectionView);
+		projection.rotateX(-transform.rotationX, projectionView);
+		projection.rotateY(-transform.rotationY, projectionView);
+		projection.rotateZ(-transform.rotationZ, projectionView);
+		projection.translate(-transform.x, -transform.y, -transform.z, projectionView);
 	}
 	
 	/**
@@ -51,37 +53,19 @@ public class Camera extends CNGE {
 	 * 
 	 * @return the model matrix in world coordiantes
 	 */
-	public Matrix4f getM(Transform transform) {
+	public Matrix4f getM(Transform3D transform) {
 		return new Matrix4f()
 				.translate(transform.x + ((-transform.width * transform.wScale) / 2) + 2 * (transform.width / 2), transform.y + ((-transform.height * transform.hScale) / 2) + 2 * (transform.height / 2), 0)
+
+				.rotateX(transform.rotationX)
+				.rotateY(transform.rotationY)
+				.rotateZ(transform.rotationZ)
 				
-				.rotateZ(transform.rotation)
+				.translate(-(transform.width / 2), -(transform.height / 2), -(transform.depth / 2))
 				
-				.translate(-(transform.width / 2), -(transform.height / 2), 0)
-				
-				.scale(transform.getWidth(), transform.getHeight(), 1);
+				.scale(transform.getWidth(), transform.getHeight(), transform.getDepth());
 	}
 
-	/**
-	 * gets vao model matrix based on manually inputted bounds.
-	 * If you need something to be as exact as possible
-	 *
-	 * @param left
-	 * @param right
-	 * @param up
-	 * @param down
-	 *
-	 * @return the model matrix in world coordiantes
-	 */
-	public Matrix4f getMBounds(float left, float right, float up, float down) {
-		return new Matrix4f().translate(left, up, 0).scale(right - left, down - up, 1);
-	}
-
-	public Matrix4f getMDims(float left, float up, float width, float height) {
-		return new Matrix4f().translate(left, up, 0).scale(width , height, 1);
-	}
-
-	
 	/**
 	 * gets the mvp matrix from vao certain model matrix
 	 * 
@@ -131,7 +115,7 @@ public class Camera extends CNGE {
 	 * 
 	 * @return the camera's transform
 	 */
-	public Transform getTransform() {
+	public Transform3D getTransform() {
 		return transform;
 	}
 }

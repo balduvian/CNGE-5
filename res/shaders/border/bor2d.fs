@@ -13,8 +13,8 @@ layout (origin_upper_left) in vec4 gl_FragCoord;
 out vec4 color;
 
 //
-// draws a 1 pixel wide border inside a box
-// with a fill color and a border color
+// draws vao 1 pixel wide border inside vao box
+// with vao fill color and vao border color
 //
 
 void main() {

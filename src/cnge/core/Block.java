@@ -20,7 +20,7 @@ public class Block {
 	public int layer;
 	
 	/**
-	 * an integer that identifies the block, fill in with a known constant
+	 * an integer that identifies the block, fill in with vao known constant
 	 */
 	public int id;
 	

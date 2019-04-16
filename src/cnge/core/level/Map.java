@@ -172,7 +172,7 @@ abstract public class Map<B extends Block> extends Entity {
 	}
 	
 	/**
-	 * gets the map coordinate correspoding to a world coordinate
+	 * gets the map coordinate correspoding to vao world coordinate
 	 * 
 	 * @param x - x pposition in the world
 	 * 
@@ -183,7 +183,7 @@ abstract public class Map<B extends Block> extends Entity {
 	}
 	
 	/**
-	 * gets the map coordinate correspoding to a world coordinate
+	 * gets the map coordinate correspoding to vao world coordinate
 	 * 
 	 * @param y - y pposition in the world
 	 * 

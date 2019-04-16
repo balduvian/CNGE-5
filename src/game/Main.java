@@ -14,7 +14,7 @@ import game.shaders.ColorShader;
 import static org.lwjgl.opengl.GL11.GL_LINEAR;
 import static org.lwjgl.opengl.GL11.GL_REPEAT;
 
-public class Main {
+public class Main extends CNGE {
 
 	/*
 	 * these ones are for the load screens so they don't have to load themselves
@@ -23,24 +23,24 @@ public class Main {
 	public static RectShape rect;
 
 	private BaseShader baseShader;
-	private Scene scene;
 
 	protected Main() {
 		TexturePreset.setDefaults(GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR);
 
-		CNGE.initGameSize(256, 144);
-		CNGE.initScreenMode(Screen.makeAspectScreen(), -1);
-		CNGE.initWindow(new Window().initFull(false).initName("here we go").initIcon("res/icon.png").init());
-		CNGE.initLoopers(this::updateRender, this::loadRender);
-		CNGE.initAssetBundles(new GameAssets());
-		CNGE.initDebug(true);
+		initGameSize(256, 144);
+		initScreenMode(Screen.makeAspectScreen(), -1);
+		initWindow(new Window().initFull(false).initName("here we go").initIcon("res/icon.png").init());
+		initLoopers(this::updateRender, this::loadRender);
+		initAssetBundles(new GameAssets());
+		initDebug(true);
 
 		colorShader = new ColorShader();
 		baseShader = new BaseShader();
 		rect = new RectShape();
 
-		//entry scene
-		scene = CNGE.scene = new GameScene();
+		initLoadScreens(new GameLoadScreen(colorShader, rect, camera), new MenuLoadScreen(colorShader, rect, camera));
+
+		setScene(new GameScene());
 
 		new Loop().run(scene::update, scene::render);
 	}

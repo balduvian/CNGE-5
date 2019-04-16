@@ -25,7 +25,7 @@ abstract public class Shader implements Destroyable {
 	protected int mvpLoc;
 	
 	/**
-	 * creates a shader
+	 * creates vao shader
 	 * 
 	 * @param vertPath - path to the base code of the vertex shader
 	 * @param fragPath - path to the base code of the fragment shader

@@ -267,7 +267,7 @@ public class Window extends CNGE {
 		
 		buffer.flip();
 			
-	    // create a GLFWImage
+	    // create vao GLFWImage
 	    GLFWImage img = GLFWImage.create();
 	    img.width(bwi);     // setup the images' width
 	    img.height(bhi);   // setup the images' height
@@ -277,7 +277,7 @@ public class Window extends CNGE {
 	}
 	
 	/**
-	 * saves a bufferedimage of the current loadRender buffer
+	 * saves vao bufferedimage of the current loadRender buffer
 	 * performance = bad
 	 */
 	public void takeScreenShot(int scw, int sch) {

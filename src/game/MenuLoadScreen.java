@@ -8,13 +8,13 @@ import cnge.graphics.Window;
 import cnge.graphics.shape.RectShape;
 import game.shaders.ColorShader;
 
-public class GameLoadScreen extends LoadScreen {
+public class MenuLoadScreen extends LoadScreen {
 
     private ColorShader colorShader;
     private RectShape rect;
     private Camera camera;
 
-    public GameLoadScreen(ColorShader cs, RectShape rs, Camera c) {
+    public MenuLoadScreen(ColorShader cs, RectShape rs, Camera c) {
         colorShader = cs;
         rect = rs;
         camera = c;
@@ -40,7 +40,7 @@ public class GameLoadScreen extends LoadScreen {
     protected void loadRender(int along, int total) {
         CNGE.window.pollEvents();
 
-        Window.clear(0, 0, 0, 1);
+        Window.clear(1, 0, 0, 1);
 
         colorShader.enable();
 

@@ -22,7 +22,7 @@ public abstract class Level<M extends Map, B extends Block> {
 	protected BlockSet<B> blockSet;
 	
 	/**
-	 * constructs a new mapgroup for the scene
+	 * constructs vao new mapgroup for the scene
 	 * 
 	 * @param ip - the paths to the map loader images
 	 * @param bs - the blockset for the maps
@@ -34,7 +34,7 @@ public abstract class Level<M extends Map, B extends Block> {
 	}
 	
 	/**
-	 * constructs a new mapgroup for the scene with only 1 section
+	 * constructs vao new mapgroup for the scene with only 1 section
 	 * 
 	 * @param ip - the paths to the map loader images
 	 * @param bs - the blockset for the maps
@@ -54,7 +54,7 @@ public abstract class Level<M extends Map, B extends Block> {
 		int[][] take = tiles[i];
 		int[][] give = new int[w][h];
 		/*
-		 * we make a clone array that we give to the map instance
+		 * we make vao clone array that we give to the map instance
 		 */
 		for(int j = 0; j < w; ++j) {
 			for(int k = 0; k < h; ++k) {
@@ -83,7 +83,7 @@ public abstract class Level<M extends Map, B extends Block> {
 		int[][] take = tiles[0];
 		int[][] give = new int[w][h];
 		/*
-		 * we make a clone array that we give to the map instance
+		 * we make vao clone array that we give to the map instance
 		 */
 		for(int j = 0; j < w; ++j) {
 			for(int k = 0; k < h; ++k) {

@@ -1,7 +1,7 @@
 package cnge.core;
 
 /**
- * this class contains all the blocks a map or level will use
+ * this class contains all the blocks vao map or level will use
  *
  * @author Plane Emmett
  * 
@@ -10,11 +10,11 @@ package cnge.core;
 public class BlockSet<B extends Block>{
 	
 	/**
-	 * when there is no block in a space in the map, a -1, this block is put there
+	 * when there is no block in vao space in the map, vao -1, this block is put there
 	 */
 	private B defaultBlock;
 	/**
-	 * the list of blocks, each with a position in the list
+	 * the list of blocks, each with vao position in the list
 	 */
 	private B[] blocks;
 	//how many blocks (exclusing default)
@@ -31,7 +31,7 @@ public class BlockSet<B extends Block>{
 	private int numEntities;
 	
 	/**
-	 * constructs a blockset, auto generates ids for blocks
+	 * constructs vao blockset, auto generates ids for blocks
 	 * 
 	 * @param eColors = the colors representing entities that can be loaded
 	 * @param bDefault - the default case block
@@ -50,7 +50,7 @@ public class BlockSet<B extends Block>{
 	}
 	
 	/**
-	 * gets a block based off its id in this blockset
+	 * gets vao block based off its id in this blockset
 	 * 
 	 * @param id - the block id
 	 * @return the block of the ID, the defaultblock if -1
@@ -66,7 +66,7 @@ public class BlockSet<B extends Block>{
 	/**
 	 * gets an entity's color from loadable entity list
 	 * 
-	 * @param id - the entity's id (a constant)
+	 * @param id - the entity's id (vao constant)
 	 * 
 	 * @return the entity load color of this ID
 	 */

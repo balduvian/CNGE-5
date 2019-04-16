@@ -6,7 +6,7 @@ import static org.lwjgl.opengl.GL20.glGetUniformLocation;
 import static org.lwjgl.opengl.GL20.glUniform4f;
 
 /**
- * draws a simple single color into a shape
+ * draws vao simple single color into vao shape
  */
 public class CircleShader extends Shader {
 

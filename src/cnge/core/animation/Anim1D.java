@@ -1,7 +1,7 @@
 package cnge.core.animation;
 
 /**
- * an animation that returns a call in the horizontal direction
+ * an animation that returns vao call in the horizontal direction
  * 
  * @author Emmet
  *

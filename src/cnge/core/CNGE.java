@@ -1,10 +1,7 @@
 package cnge.core;
 
 import cnge.core.interfaces.*;
-import cnge.graphics.ALManagement;
-import cnge.graphics.Camera;
-import cnge.graphics.FrameBuffer;
-import cnge.graphics.Window;
+import cnge.graphics.*;
 import cnge.graphics.texture.Texture;
 
 public class CNGE {
@@ -18,6 +15,7 @@ public class CNGE {
 
     public static float gameWidth;
     public static float gameHeight;
+    public static float gameDepth;
 
     public static int framerate;
 
@@ -28,10 +26,12 @@ public class CNGE {
     public static Screen screen;
     public static ALManagement audio;
     public static AssetBundle[] assetBundles;
+    public static LoadScreen[] loadScreens;
     public static Scene scene;
 
     public static Looper updateRender;
     public static LoadLooper loadRender;
+
     /**
      * initializes the width and height of the game.
      * this is the most crucial piece of information on which,
@@ -43,6 +43,12 @@ public class CNGE {
     public static void initGameSize(float width, float height) {
         gameWidth = width;
         gameHeight = height;
+    }
+
+    public static void initGameSize3D(float width, float height, float depth) {
+        gameWidth = width;
+        gameHeight = height;
+        gameDepth = depth;
     }
 
     /**
@@ -87,6 +93,14 @@ public class CNGE {
      */
     public static void initAssetBundles(AssetBundle... abs) {
         assetBundles = abs;
+    }
+
+    public static void initLoadScreens(LoadScreen... lss) {
+        loadScreens = lss;
+    }
+
+    public static void setScene(Scene s) {
+        scene = s;
     }
 
 }

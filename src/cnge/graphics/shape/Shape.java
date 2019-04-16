@@ -4,18 +4,18 @@ import cnge.graphics.Destroyable;
 
 abstract public class Shape implements Destroyable {
 	
-	protected VAO vbo;
+	protected VAO vao;
 
 	protected void init(int numAttribs, float vertices[], int[] indices, int drawMode) {
-		vbo = new VAO(numAttribs, vertices, indices, drawMode);
+		vao = new VAO(numAttribs, vertices, indices, drawMode);
 	}
 
 	public void render() {
-		vbo.render();
+		vao.render();
 	}
 
 	public Void destroy() {
-		vbo.destroy();
+		vao.destroy();
 		return null;
 	}
 	
