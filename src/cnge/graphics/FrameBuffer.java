@@ -8,11 +8,11 @@ import cnge.core.CNGE;
 import cnge.graphics.texture.MultisampleTexture;
 import cnge.graphics.texture.Texture;
 
-public class FrameBuffer extends CNGE {
+public class FrameBuffer extends CNGE implements Destroyable {
 	
     private int id;
-    private int colorRenderBufferID;
-    private int depthRenderBufferID;
+    private int colorRenderBufferID = -1;
+    private int depthRenderBufferID = -1;
 
     private int width;
     private int height;
@@ -182,6 +182,23 @@ public class FrameBuffer extends CNGE {
 
     public int getHeight() {
         return height;
+    }
+
+    public Void destroy() {
+        if(colorTexture != null) {
+            colorTexture.destroy();
+        }
+        if(depthTexture != null) {
+            depthTexture.destroy();
+        }
+        if(colorRenderBufferID != -1) {
+            glDeleteBuffers(colorRenderBufferID);
+        }
+        if(depthRenderBufferID != -1) {
+            glDeleteBuffers(depthRenderBufferID);
+        }
+        glDeleteFramebuffers(id);
+        return null;
     }
 
 }

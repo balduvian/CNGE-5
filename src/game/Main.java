@@ -31,7 +31,7 @@ public class Main extends CNGE {
 		initScreenMode(Screen.makeAspectScreen(), -1);
 		initWindow(new Window().initFull(false).initName("here we go").initIcon("res/icon.png").init());
 		initLoopers(this::updateRender, this::loadRender);
-		initAssetBundles(new GameAssets());
+		initAssetBundles(new GameAssets(), new MenuAssets(), new SharedAssets());
 		initDebug(true);
 
 		colorShader = new ColorShader();
@@ -40,9 +40,9 @@ public class Main extends CNGE {
 
 		initLoadScreens(new GameLoadScreen(colorShader, rect, camera), new MenuLoadScreen(colorShader, rect, camera));
 
+		initGameLoop();
 		setScene(new GameScene());
-
-		new Loop().run(scene::update, scene::render);
+		gameStart();
 	}
 
 	private void updateRender(SubLooper update, SubLooper render) {

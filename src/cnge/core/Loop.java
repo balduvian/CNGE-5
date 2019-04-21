@@ -3,7 +3,7 @@ package cnge.core;
 import cnge.core.interfaces.LoadSubLooper;
 import cnge.core.interfaces.SubLooper;
 
-public class Loop extends CNGE {
+public class Loop<subLooper> extends CNGE {
 
     /*
      * the fps printer is above all
@@ -25,8 +25,13 @@ public class Loop extends CNGE {
     private long lastSec;
     private int frames;
     private long now;
-
     private boolean lastResizing;
+
+    /*
+     * the things the loop does
+     */
+    private SubLooper update;
+    private SubLooper render;
 
     private interface VoidCall {
         void call();
@@ -66,7 +71,12 @@ public class Loop extends CNGE {
         }
     }
 
-    public void run(SubLooper update, SubLooper render) {
+    public void setUpdateRender(SubLooper u, SubLooper r) {
+        update = u;
+        render = r;
+    }
+
+    public void run() {
         beginLoop();
         while(!window.shouldClose()) {
            if(shouldDoFrame()) {

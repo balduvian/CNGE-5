@@ -1,4 +1,4 @@
-package cnge.graphics;
+package cnge.graphics.sound;
 
 import static org.lwjgl.openal.ALC10.alcCreateContext;
 import static org.lwjgl.openal.ALC10.alcMakeContextCurrent;

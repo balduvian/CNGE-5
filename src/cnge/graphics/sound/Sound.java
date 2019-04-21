@@ -1,9 +1,11 @@
-package cnge.graphics;
+package cnge.graphics.sound;
 
 
+import cnge.graphics.Destroyable;
+import cnge.graphics.sound.WaveData;
 import org.lwjgl.openal.AL10;
 
-public class Sound {
+public class Sound implements Destroyable {
 
 	private int buffer;
 	private int sourceId;
@@ -23,17 +25,32 @@ public class Sound {
 		AL10.alSource3f(sourceId, AL10.AL_POSITION, 0, 0, 0);
 		AL10.alSourcePlay(sourceId);
 	}
-	
+
 	public void stop() {
 		AL10.alSourceStop(sourceId);
 	}
-	
+
+	//
+	//sets
+	//
 	public void setVolume(float volume) {
 		AL10.alSourcef(sourceId, AL10.AL_GAIN, volume);
 	}
-	
-	public void destroy() {
+
+
+	public void setPitch(float pitch) {
+		AL10.alSourcef(sourceId, AL10.AL_PITCH, pitch);
+	}
+	//
+	//gets
+	//
+	public boolean isPlaying() {
+		return AL10.alGetBoolean(AL10.AL_PLAYING);
+	}
+
+	public Void destroy() {
 		AL10.alDeleteBuffers(buffer);
 		AL10.alDeleteSources(sourceId);
+		return null;
 	}
 }

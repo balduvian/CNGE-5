@@ -2,6 +2,8 @@ package cnge.core;
 
 import cnge.core.interfaces.*;
 import cnge.graphics.*;
+import cnge.graphics.sound.ALManagement;
+import cnge.graphics.Window;
 import cnge.graphics.texture.Texture;
 
 public class CNGE {
@@ -29,6 +31,7 @@ public class CNGE {
     public static LoadScreen[] loadScreens;
     public static Scene scene;
 
+    public static Loop gameLoop;
     public static Looper updateRender;
     public static LoadLooper loadRender;
 
@@ -99,8 +102,17 @@ public class CNGE {
         loadScreens = lss;
     }
 
+    public static void initGameLoop() {
+        gameLoop = new Loop();
+    }
+
     public static void setScene(Scene s) {
         scene = s;
+        gameLoop.setUpdateRender(scene::update, scene::render);
+    }
+
+    public static void gameStart() {
+        gameLoop.run();
     }
 
 }

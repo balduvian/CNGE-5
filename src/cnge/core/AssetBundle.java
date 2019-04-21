@@ -1,10 +1,10 @@
 package cnge.core;
 
-abstract public class AssetBundle<SCENE extends Scene> extends CNGE {
+abstract public class AssetBundle extends CNGE {
 
 	protected static Scene.LoadStruct loadStruct;
 
-	private boolean loaded;
+	protected boolean loaded;
 	protected int subTotal;
 
 	public static void setup(Scene.LoadStruct ls) {
@@ -23,22 +23,22 @@ abstract public class AssetBundle<SCENE extends Scene> extends CNGE {
 	/**
 	 * call scene calls this to load, no need to call the routine, as this will call it
 	 */
-	public void load(SCENE scene) {
-		loadRoutine(scene);
+	public void load() {
+		loadRoutine();
 		loaded = true;
 	}
 
 	/**
 	 * the scene calls this to unload, no need to call the routine, as this will call it
 	 */
-	public void unload(SCENE scene) {
-		unloadRoutine(scene);
+	public void unload() {
+		unloadRoutine();
 		loaded = false;
 	}
 
-	abstract protected void loadRoutine(SCENE scene);
+	abstract protected void loadRoutine();
 
-	abstract protected void unloadRoutine(SCENE scene);
+	abstract protected void unloadRoutine();
 
 	/**
 	 * this method consolidates loading an object, and calling the loadscreen to loadRender
