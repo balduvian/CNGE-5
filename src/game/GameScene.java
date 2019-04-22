@@ -16,9 +16,8 @@ import static org.lwjgl.opengl.GL11.GL_LINEAR;
 public class GameScene extends Scene {
 
     private Transform box;
-    private Transform box2;
 
-    private Transform planetT;
+    private Map1 map;
 
     private float songMix;
 
@@ -29,10 +28,11 @@ public class GameScene extends Scene {
     @Override
     public void sceneStart() {
         box = new Transform(10, 10, 60, 60);
-        box2 = new Transform(20, 10, 60, 60);
 
         GameAssets.song0.play(true);
         GameAssets.song1.play(true);
+
+        map = new Map1();
 
         songMix = 0;
     }
@@ -67,23 +67,12 @@ public class GameScene extends Scene {
 
     @Override
     public void render() {
-
-        window.clear(1f, 1f, 1f, 1f);
-
         GameAssets.planetBuffer.enableTexture();
 
         window.clear(0, 0f, 0f, 1f);
 
-       // GameAssets.lagTexture.bind();
-
-        SharedAssets.circleShader.enable();
-        SharedAssets.circleShader.setUniforms(1f, 0f, 0f, 1f);
-        SharedAssets.circleShader.setMvp(CNGE.camera.getMVP(CNGE.camera.getM(box)));
-        //GameAssets.circleShader.setMvp(CNGE.camera.ndcFullMatrix());
-
-        SharedAssets.rect.render();
-
-        //
+        Transform t = camera.getTransform();
+        map.render(t.x, t.y, t.width, t.height);
 
         CNGE.gameBuffer.enable();
 
@@ -91,8 +80,6 @@ public class GameScene extends Scene {
         SharedAssets.textureShader.setMvp(CNGE.camera.ndcFullMatrix());
 
         SharedAssets.rect.render();
-
-       // planetBuffer.resolve(CNGE.gameBuffer);
     }
 
 }

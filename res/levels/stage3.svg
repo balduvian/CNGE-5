@@ -1,0 +1,39 @@
+<rect class="cls-1" width="256" height="144"/>
+<polygon class="cls-2" points="176 113 193 91 172 45 176 113"/>
+<polygon points="193 91 192 38 172 45 193 91"/>
+<polygon class="cls-2" points="131 58 117 13 84 29 131 58"/>
+<polygon points="192 38 117 13 172 45 192 38"/>
+<polygon class="cls-2" points="140 132 176 113 127 95 140 132"/>
+<polygon points="75 72 52 116 80 96 75 72"/>
+<polygon class="cls-2" points="42 87 52 116 75 72 42 87"/>
+<polygon points="105 90 131 71 102 68 105 90"/>
+<polygon points="92 132 140 132 103 121 92 132"/>
+<polygon points="117 13 53 20 84 29 117 13"/>
+<polygon points="103 121 140 132 127 95 103 121"/>
+<polygon points="172 45 117 13 131 58 172 45"/>
+<polygon points="140 132 178 131 176 113 140 132"/>
+<polygon points="134 141 178 131 140 132 134 141"/>
+<polygon points="92 132 134 141 140 132 92 132"/>
+<polygon points="176 113 178 131 193 91 176 113"/>
+<polygon points="84 29 53 20 56 44 84 29"/>
+<polygon points="68 133 134 141 92 132 68 133"/>
+<polygon points="56 44 26 64 42 87 56 44"/>
+<polygon points="26 64 33 114 42 87 26 64"/>
+<polygon points="52 116 68 133 92 132 52 116"/>
+<polygon class="cls-2" points="53 20 26 64 56 44 53 20"/>
+<polygon points="42 87 33 114 52 116 42 87"/>
+<polygon points="33 114 68 133 52 116 33 114"/>
+<line class="cls-3" x1="84" y1="29" x2="131" y2="58"/>
+<line class="cls-3" x1="172" y1="45" x2="131" y2="58"/>
+<line class="cls-3" x1="176" y1="113" x2="172" y2="45"/>
+<line class="cls-3" x1="131" y1="71" x2="102" y2="68"/>
+<line class="cls-3" x1="105" y1="90" x2="102" y2="68"/>
+<line class="cls-3" x1="131" y1="71" x2="105" y2="90"/>
+<line class="cls-3" x1="176" y1="113" x2="127" y2="95"/>
+<line class="cls-3" x1="92" y1="132" x2="127" y2="95"/>
+<line class="cls-3" x1="52" y1="116" x2="92" y2="132"/>
+<line class="cls-3" x1="80" y1="96" x2="52" y2="116"/>
+<line class="cls-3" x1="75" y1="72" x2="80" y2="96"/>
+<line class="cls-3" x1="42" y1="87" x2="75" y2="72"/>
+<line class="cls-3" x1="56" y1="44" x2="42" y2="87"/>
+<line class="cls-3" x1="84" y1="29" x2="56" y2="44"/>

@@ -20,6 +20,7 @@ import java.nio.ByteBuffer;
 import javax.imageio.ImageIO;
 
 import cnge.core.CNGE;
+import cnge.graphics.sound.ALManagement;
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFW;
@@ -356,6 +357,7 @@ public class Window extends CNGE {
 	}
 	
 	public void close() {
+		audio.destroy();
 		glfwSetWindowShouldClose(window, true);
 	}
 	

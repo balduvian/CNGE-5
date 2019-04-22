@@ -92,6 +92,13 @@ public class Camera extends CNGE {
 	public Matrix4f getMVP(Matrix4f model) {
 		return new Matrix4f(projectionView).mul(model);	
 	}
+
+	/**
+	 * gets the mvp for shaders that choose the world points themselves
+	 */
+	public Matrix4f getSMVP() {
+		return new Matrix4f(projectionView);
+	}
 	
 	/**
 	 * gets the view matrix from vao certain model matrix for gui models.
