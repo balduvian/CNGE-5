@@ -100,6 +100,11 @@ public class Transform {
 		wScale = w;
 		hScale = h;
 	}
+
+	public void scale(float w, float h) {
+		wScale += w;
+		hScale += h;
+	}
 	
 	public Transform destinationScale(float w, float h) {
 		Transform ret = new Transform(this);
@@ -136,6 +141,16 @@ public class Transform {
 	
 	public float getHeight() {
 		return height * hScale;
+	}
+
+	public void setCenter(Transform ot) {
+		x = ot.x - (width / 2) + (ot.width / 2);
+		y = ot.y - (height / 2) + (ot.height / 2);
+	}
+
+	public void setCenter(float o, float a) {
+		x = o - (width / 2);
+		y = a - (height / 2);
 	}
 	
 }

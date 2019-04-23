@@ -4,6 +4,8 @@ public class CCD {
 
     public static class Line {
         public float x0, y0, x1, y1;
+        public int index;
+        public boolean collidable;
 
         public Line(float x0, float y0, float x1, float y1) {
             this.x0 = x0;
@@ -20,39 +22,65 @@ public class CCD {
         }
     }
 
+    public static class Collision {
+        public int info;
+        public double t_;
+
+        public Collision(int i, double t) {
+            info = i;
+            t_ = t;
+        }
+
+        public boolean collision() {
+            return (info & 0x001) == 0x001;
+        }
+
+        public boolean collisionNormal() {
+            return (info & 0x010) == 0x010;
+        }
+
+        public boolean collisionAntiNormal() {
+            return (info & 0x100) == 0x100;
+        }
+    }
+
     private static double hitPoint(Line move, Line wall) {
-        return ((move.y1 - move.y0) * (wall.x0 - move.x0) - (move.x1 - move.x0) * (wall.y0 - move.y0)) / ((move.x1 - move.x0) * (wall.y1 - wall.y0) - (move.y1 - move.y0) * (wall.x1 - wall.x0));
+        return (
+            (wall.y1 - wall.y0) * (move.x0 - wall.x0) - (wall.x1 - wall.x0) * (move.y0 - wall.y0)
+        ) / (
+            (wall.x1 - wall.x0) * (move.y1 - move.y0) - (wall.y1 - wall.y0) * (move.x1 - move.x0)
+        );
     }
 
     private static boolean inline(double t) {
         return !(t > 1 || t < 0);
     }
 
-    private static boolean startNormal(Line move, Line wall) {
-        return (wall.y1 - wall.y0) * (wall.x0 - move.x0) + (wall.x1 - wall.x0) * (move.y0 - wall.y0) >= 0;
+    private static boolean wallStartNormal(Line move, Line wall) {
+        return (move.y1 - move.y0) * (move.x0 - wall.x0) + (move.x1 - move.x0) * (wall.y0 - move.y0) >= 0;
     }
 
-    private static boolean endNormal(Line move, Line wall) {
-        return (wall.y1 - wall.y0) * (wall.x0 - move.x1) + (wall.x1 - wall.x0) * (move.y1 - wall.y0) >= 0;
+    private static boolean wallEndNormal(Line move, Line wall) {
+        return (move.y1 - move.y0) * (move.x0 - wall.x1) + (move.x1 - move.x0) * (wall.y1 - move.y0) >= 0;
     }
 
     //
     //calls VVVVVVVV
     //
 
-
-    public static int result(Line move, Line wall) {
-        if(inline(hitPoint(move, wall))) {
-            boolean sn = startNormal(move, wall);
-            boolean en = endNormal(move, wall);
+    public static Collision result(Line move, Line wall) {
+        double t;
+        if(inline(t = hitPoint(move, wall))) {
+            boolean sn = wallStartNormal(move, wall);
+            boolean en = wallEndNormal(move, wall);
 
             if(sn && !en) {
-                return 0x011;
+                return new Collision(0x011, t);
             } else if(!sn && en) {
-                return 0x101;
+                return new Collision(0x101, t);
             }
         }
-        return 0x000;
+        return new Collision(0x000, t);
     }
 
     public static double xAlong(double t, Line line) {
@@ -61,18 +89,6 @@ public class CCD {
 
     public static double yAlong(double t, Line line) {
         return (line.y1 - line.y0) * t + line.y0;
-    }
-
-    public boolean collision(int result) {
-        return (result & 0x001) == 0x001;
-    }
-
-    public boolean collisionNormal(int result) {
-        return (result & 0x010) == 0x010;
-    }
-
-    public boolean collisionAntiNormal(int result) {
-        return (result & 0x100) == 0x100;
     }
 
 }

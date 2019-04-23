@@ -1,11 +1,15 @@
 package game;
 
 import cnge.core.CCD;
+import cnge.core.CNGE;
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.system.CallbackI;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_I;
 
 abstract public class Map {
 
@@ -331,6 +335,7 @@ abstract public class Map {
         //put lines into zones
         for(int i = 0; i < numLines; ++i) {
             CCD.Line l = lines[i];
+            l.index = i;
 
             boolean[][] adds = new boolean[zonesWide][zonesTall];
 
@@ -353,10 +358,25 @@ abstract public class Map {
     }
 
     private void putIn(Object t, ArrayList[][] put, boolean[][] check, float x0, float y0, float x1, float y1) {
+        int[] bounds = getBoundsUnSorted(x0, y0, x1, y1);
+
+        for(int j = bounds[0]; j <= bounds[1]; ++j) {
+            for(int k = bounds[2]; k <= bounds[3]; ++k) {
+                if(zoneInRange(j, k)) {
+                    if (!check[j][k]) {
+                        check[j][k] = true;
+                        put[j][k].add(t);
+                    }
+                }
+            }
+        }
+    }
+
+    public int[] getBoundsUnSorted(float x0, float y0, float x1, float y1) {
         int zx0 = (int)(x0 / zoneWidth);
-        int zy0 = (int)(y0 / zoneWidth);
+        int zy0 = (int)(y0 / zoneHeight);
         int zx1 = (int)(x1 / zoneWidth);
-        int zy1 = (int)(y1 / zoneWidth);
+        int zy1 = (int)(y1 / zoneHeight);
 
         int right = Math.max(zx1, zx0);
         int left = Math.min(zx1, zx0);
@@ -364,63 +384,83 @@ abstract public class Map {
         int down = Math.max(zy1, zy0);
         int up = Math.min(zy1, zy0);
 
-        for(int j = left; j <= right; ++j) {
-            for(int k = up; k <= down; ++k) {
-                if(!check[j][k]) {
-                    check[j][k] = true;
-                    put[j][k].add(t);
-                }
-            }
-        }
+        return new int[]{left, right, up, down};
+    }
+
+    public int[] getBoundsSorted(float l, float u, float r, float d) {
+        int left = (int)(l / zoneWidth);
+        int up = (int)(u / zoneHeight);
+        int right = (int)(r / zoneWidth);
+        int down = (int)(d / zoneHeight);
+
+        return new int[]{left, right, up, down};
+    }
+
+    public boolean zoneInRange(float x, float y) {
+        return (x >= 0 && x < zonesWide) && (y >= 0 && y < zonesTall);
     }
 
     public void render(float l, float u, float r, float d) {
-        int zl = (int)(l / zoneWidth);
-        int zr = (int)(r / zoneWidth);
-        int zu = (int)(u / zoneHeight);
-        int zd = (int)(d / zoneHeight);
+        int[] bounds = getBoundsSorted(l, u, r, d);
 
-        int rm = zonesWide - 1;
-        int rt = zonesTall - 1;
+        boolean[] alreadyT = new boolean[numTriangles];
+        boolean[] alreadyL = new boolean[numLines];
 
-        if(zl < 0) {
-            zl = 0;
-        } else if(zl > rm) {
-            zl = rm;
-        }
-        if(zr < 0) {
-            zr = 0;
-        } else if(zr > rm) {
-            zr = rm;
-        }
-        if(zu < 0) {
-            zu = 0;
-        } else if(zu > rt) {
-            zu = rt;
-        }
-        if(zd < 0) {
-            zd = 0;
-        } else if(zd > rt) {
-            zd = rt;
-        }
-
-        boolean[] already = new boolean[numTriangles];
-
-        for(int i = zl; i <= zr; ++i) {
-            for(int j = zu; j <= zd; ++j) {
-                Triangle[] list = triangleZones[i][j];
-                int num = list.length;
-                for(int k = 0; k < num; ++k) {
-                    Triangle t = list[k];
-                    if(!already[t.index]) {
-                        renderTri(t);
-                        already[t.index] = true;
+        for(int i = bounds[0]; i <= bounds[1]; ++i) {
+            for(int j = bounds[2]; j <= bounds[3]; ++j) {
+                if(zoneInRange(i, j)) {
+                    Triangle[] tList = triangleZones[i][j];
+                    int num = tList.length;
+                    for (int k = 0; k < num; ++k) {
+                        Triangle tr = tList[k];
+                        if (!alreadyT[tr.index]) {
+                            renderTri(tr, i, j);
+                            alreadyT[tr.index] = true;
+                        }
+                    }
+                    CCD.Line[] lList = lineZones[i][j];
+                    num = lList.length;
+                    for(int k = 0; k < num; ++k) {
+                        CCD.Line li = lList[k];
+                        if(!alreadyL[li.index]) {
+                            renderLin(li, i, j);
+                            alreadyL[li.index] = true;
+                        }
                     }
                 }
             }
         }
     }
 
-    public abstract void renderTri(Triangle t);
+    public abstract void renderTri(Triangle t, int zx, int zy);
+    public abstract void renderLin(CCD.Line l, int zx, int zy);
+
+    public CCD.Line[][][] getTriangleZones() {
+        return lineZones;
+    }
+
+    public int getZonesWide() {
+        return zonesWide;
+    }
+
+    public int getZonesTall() {
+        return zonesTall;
+    }
+
+    public int getWidth() {
+        return mapWidth;
+    }
+
+    public int getheight() {
+        return mapHeight;
+    }
+
+    public float getZoneWidth() {
+        return zoneWidth;
+    }
+
+    public float getZoneHeight() {
+        return zoneHeight;
+    }
 
 }

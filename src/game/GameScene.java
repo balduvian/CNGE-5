@@ -21,6 +21,8 @@ public class GameScene extends Scene {
 
     private float songMix;
 
+    private Player player;
+
     public GameScene(Class<? extends AssetBundle>... unloads) {
         super(unloads, GameLoadScreen.class, GameAssets.class, SharedAssets.class);
     }
@@ -35,6 +37,8 @@ public class GameScene extends Scene {
         map = new Map1();
 
         songMix = 0;
+
+        player = new Player(128, 128);
     }
 
     @Override
@@ -44,9 +48,6 @@ public class GameScene extends Scene {
 
     @Override
     public void update() {
-        if(window.keyPressed(GLFW_KEY_W)) {
-            System.out.println();
-        }
         if(window.keyPressed(GLFW_KEY_ENTER)) {
             setScene(new MenuScene(GameAssets.class));
         }
@@ -61,8 +62,32 @@ public class GameScene extends Scene {
                 songMix = 0;
             }
         }
+
+        if(window.keyPressed(GLFW_KEY_W)) {
+            camera.getTransform().moveY((float)(Loop.time * -64));
+        }
+        if(window.keyPressed(GLFW_KEY_A)) {
+            camera.getTransform().moveX((float)(Loop.time * -64));
+        }
+        if(window.keyPressed(GLFW_KEY_S)) {
+            camera.getTransform().moveY((float)(Loop.time * 64));
+        }
+        if(window.keyPressed(GLFW_KEY_D)) {
+            camera.getTransform().moveX((float)(Loop.time * 64));
+        }
+
+        if(window.keyPressed(GLFW_KEY_Z)) {
+            camera.getTransform().scale((float)(0.1 * Loop.time), (float)(0.1 * Loop.time));
+        }
+        if(window.keyPressed(GLFW_KEY_X)) {
+            camera.getTransform().scale((float)(-0.1 * Loop.time), (float)(-0.1 * Loop.time));
+        }
+
         GameAssets.song0.setVolume(songMix);
         GameAssets.song1.setVolume(1 - songMix);
+
+        player.update(map);
+        player.cameraUpdate();
     }
 
     @Override
@@ -72,7 +97,21 @@ public class GameScene extends Scene {
         window.clear(0, 0f, 0f, 1f);
 
         Transform t = camera.getTransform();
-        map.render(t.x, t.y, t.width, t.height);
+        map.render(t.x, t.y, t.width + t.x, t.height + t.y);
+
+        for(int i = 0; i < map.getZonesWide(); ++i) {
+            for(int j = 0; j < map.getZonesTall(); ++j) {
+                SharedAssets.colorShader.enable();
+                SharedAssets.colorShader.setUniforms(0f, 0f, 1f, 1f);
+                Transform tra = new Transform(i * map.getZoneWidth() - 5, j * map.getZoneHeight() - 5, 10, 10);
+                SharedAssets.colorShader.setMvp(camera.getMVP(camera.getM(tra)));
+                SharedAssets.rect.render();
+            }
+        }
+
+        player.render();
+
+        //render to gamebuffer
 
         CNGE.gameBuffer.enable();
 
