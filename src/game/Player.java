@@ -41,54 +41,69 @@ public class Player {
 			//dy -= Math.sin(rotation) * speed * Loop.time;
 		}
 
-		float offx = transform.width / 2;
-		float offy = transform.height / 2;
-
-		CCD.Line movement = new CCD.Line(
-				transform.x + offx,
-				transform.y + offy,
-				transform.x + dx + offx,
-				transform.y + dy + offy
-		);
-
-		CCD.Line[][][] levelLines = map.getTriangleZones();
-		int[] bounds = map.getBoundsUnSorted(
-				movement.x0 + offx,
-				movement.y0 + offy,
-				movement.x1 + offx,
-				movement.y1 + offy
-		);
-
 		CCD.Collision nearest = null;
+		CCD.Line bestLine = null;
+		CCD.Line bestWall = null;
+		float bestOffX = 0;
+		float bestOffY = 0;
 		double nearT = 2;
 
-		--bounds[0];
-		++bounds[1];
-		--bounds[2];
-		++bounds[3];
+		for(int o = 0; o < 2; ++o) {
+			for(int p = 0; p < 2; ++p) {
+				float offx = o * transform.width;
+				float offy = p * transform.height;
 
-		for(int i = bounds[0]; i <= bounds[1]; ++i) {
-			for(int j = bounds[2]; j <= bounds[3]; ++j) {
-				if(map.zoneInRange(i, j)) {
-					CCD.Line[] lines = levelLines[i][j];
-					int len = lines.length;
-					for(int k = 0; k < len; ++k) {
-						CCD.Line wall = lines[k];
-						CCD.Collision now = CCD.result(movement, wall);
-						if(now.collision() && now.t_ < nearT) {
-							nearest = now;
-							nearT = now.t_;
+				CCD.Line movement = new CCD.Line(
+						transform.x + offx,
+						transform.y + offy,
+						transform.x + dx + offx,
+						transform.y + dy + offy
+				);
+
+				CCD.Line[][][] levelLines = map.getTriangleZones();
+				int[] bounds = map.getBoundsUnsorted(
+						movement.x0,
+						movement.y0,
+						movement.x1,
+						movement.y1
+				);
+
+				for (int i = bounds[0]; i <= bounds[1]; ++i) {
+					for (int j = bounds[2]; j <= bounds[3]; ++j) {
+						if (map.zoneInRange(i, j)) {
+							CCD.Line[] lines = levelLines[i][j];
+							int len = lines.length;
+							for (int k = 0; k < len; ++k) {
+								CCD.Line wall = lines[k];
+								CCD.Collision now = CCD.result(movement, wall);
+								if (now.collision() && now.t_ < nearT) {
+									nearest = now;
+									nearT = now.t_;
+									bestLine = movement;
+									bestWall = wall;
+									bestOffX = offx;
+									bestOffY = offy;
+								}
+							}
 						}
 					}
 				}
 			}
 		}
 
-		if(nearest != null) {
-			double colX = CCD.xAlong(nearT - 0.1f, movement) - offx;
-			double colY = CCD.yAlong(nearT - 0.1f, movement) - offy;
-			dx = (float)(colX - transform.x);
-			dy = (float)(colY - transform.y);
+		if (nearest != null) {
+			double newT = CCD.closestPoint(bestLine.x1, bestLine.y1, bestWall);
+
+			double wallX = CCD.xAlong(newT, bestWall) - bestOffX;
+			double wallY = CCD.yAlong(newT, bestWall) - bestOffY;
+
+			CCD.Line newLine = new CCD.Line(bestLine.x1, bestLine.y1, (float)wallX, (float)wallY);
+
+			double colX = CCD.xAlong(1.01, newLine);
+			double colY = CCD.yAlong(1.01, newLine);
+
+			dx = (float) (colX - transform.x);
+			dy = (float) (colY - transform.y);
 		}
 
 		transform.move(dx, dy);

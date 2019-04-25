@@ -1,15 +1,10 @@
 package game;
 
 import cnge.core.CCD;
-import cnge.core.CNGE;
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.system.CallbackI;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
-
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_I;
 
 abstract public class Map {
 
@@ -358,7 +353,7 @@ abstract public class Map {
     }
 
     private void putIn(Object t, ArrayList[][] put, boolean[][] check, float x0, float y0, float x1, float y1) {
-        int[] bounds = getBoundsUnSorted(x0, y0, x1, y1);
+        int[] bounds = getBoundsUnsorted(x0, y0, x1, y1);
 
         for(int j = bounds[0]; j <= bounds[1]; ++j) {
             for(int k = bounds[2]; k <= bounds[3]; ++k) {
@@ -372,7 +367,7 @@ abstract public class Map {
         }
     }
 
-    public int[] getBoundsUnSorted(float x0, float y0, float x1, float y1) {
+    public int[] getBoundsUnsorted(float x0, float y0, float x1, float y1) {
         int zx0 = (int)(x0 / zoneWidth);
         int zy0 = (int)(y0 / zoneHeight);
         int zx1 = (int)(x1 / zoneWidth);

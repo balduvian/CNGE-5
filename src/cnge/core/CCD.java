@@ -57,11 +57,19 @@ public class CCD {
     }
 
     private static boolean wallStartNormal(Line move, Line wall) {
-        return (move.y1 - move.y0) * (move.x0 - wall.x0) + (move.x1 - move.x0) * (wall.y0 - move.y0) >= 0;
+        return (move.y1 - move.y0) * (move.x0 - wall.x0) + (move.x1 - move.x0) * (wall.y0 - move.y0) > 0;
     }
 
     private static boolean wallEndNormal(Line move, Line wall) {
-        return (move.y1 - move.y0) * (move.x0 - wall.x1) + (move.x1 - move.x0) * (wall.y1 - move.y0) >= 0;
+        return (move.y1 - move.y0) * (move.x0 - wall.x1) + (move.x1 - move.x0) * (wall.y1 - move.y0) > 0;
+    }
+
+    public static double closestPoint(float x0, float y0, Line wall) {
+        return (
+            Math.pow(wall.x0 - x0, 2) + Math.pow(wall.y0 - y0, 2) + Math.pow(wall.x1 - wall.x0, 2) + Math.pow(wall.y1 - wall.y0, 2) - Math.pow(wall.x1 - x0, 2) - Math.pow(wall.y1 - y0, 2)
+        ) / (
+            2 * (Math.pow(wall.x1 - wall.x0, 2) + Math.pow(wall.y1 - wall.y0, 2))
+        );
     }
 
     //

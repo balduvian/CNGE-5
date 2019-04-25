@@ -17,7 +17,7 @@ public class Map1 extends Map {
     public void renderTri(Triangle t, int zx, int zy) {
         GameAssets.triangleShader.enable();
         GameAssets.triangleShader.setMvp(CNGE.camera.getSMVP());
-        if(t.type == 0) {
+        if(zx == 1 && zy == 2) {
             GameAssets.triangleShader.setUniforms(((float)zx/5+0.1f), ((float)zy/5+0.1f), 0f, 1f, t.points);
         } else {
             GameAssets.triangleShader.setUniforms(1f, 0f, 0f, 1f, t.points);
@@ -35,7 +35,11 @@ public class Map1 extends Map {
         lineTransform.rotation = (float)angle;
 
         SharedAssets.colorShader.enable();
-        SharedAssets.colorShader.setUniforms(0.4f, 0.1f, 0.9f, 0.5f);
+        if(zx == 1 && zy == 2) {
+            SharedAssets.colorShader.setUniforms(0.4f, 1f, 0.9f, 0.5f);
+        } else {
+            SharedAssets.colorShader.setUniforms(0.4f, 0.1f, 0.9f, 0.5f);
+        }
         SharedAssets.colorShader.setMvp(CNGE.camera.getMVP(CNGE.camera.getM(lineTransform)));
         SharedAssets.rect.render();
     }
